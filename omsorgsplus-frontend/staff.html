@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omsorg Plus – Vår personal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Flatpickr CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+    .modal-backdrop { backdrop-filter: blur(4px); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-700 flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="hero-gradient text-white shadow-lg">
+    <div class="container mx-auto px-6 py-6 flex items-center justify-between">
+      <h1 class="text-3xl font-bold cursor-pointer" onclick="location.href='index.html'">Omsorg Plus</h1>
+      <nav class="flex space-x-6 text-lg">
+        <a href="index.html" class="hover:text-indigo-200 transition">Startsida</a>
+        <a href="staff.html" class="underline decoration-white underline-offset-4">Vår personal</a>
+        <a href="index.html#omdomen" class="hover:text-indigo-200 transition">Omdömen</a>
+      </nav>
+    </div>
+    <div class="container mx-auto px-6 pb-12 text-center">
+      <p class="text-xl max-w-2xl mx-auto opacity-90">
+        Möt vårt dedikerade team av hjälpare. Varje medarbetare är noggrant utvald och granskad av Omsorg Plus.
+      </p>
+    </div>
+  </header>
+
+  <!-- Personal-lista -->
+  <main class="flex-1 container mx-auto px-6 py-16">
+    <h2 class="text-4xl font-semibold text-gray-800 mb-8 text-center">Vår engagerade personal</h2>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <input id="need" type="text" placeholder="Vad behöver du hjälp med?" class="w-full sm:w-1/3 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200" />
+      <input id="city" type="text" placeholder="Stad" class="w-full sm:w-1/3 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200" />
+    </div>
+    <div id="staff-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <!-- Dynamiska kort laddas här -->
+    </div>
+  </main>
+
+  <!-- Bokningsmodal -->
+  <div id="booking-modal" class="fixed inset-0 bg-black bg-opacity-40 modal-backdrop hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg mx-4 relative">
+      <button id="modal-close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
+      <h3 class="text-2xl font-bold mb-4 text-center">Boka tid</h3>
+      <form id="booking-form" class="space-y-4">
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Välj medarbetare</label>
+          <select id="staff-select" name="staffId" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" required></select>
+        </div>
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Välj datum & tid</label>
+          <input type="text" id="datetime" name="datetime" readonly class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" placeholder="Klicka för att välja" />
+        </div>
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Din adress</label>
+          <input type="text" id="address" name="address" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" placeholder="Telefon/gatuadress" required />
+        </div>
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Din e-post</label>
+          <input type="email" id="userEmail" name="userEmail" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" placeholder="din@mail.com" required />
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-3 font-semibold rounded-lg hover:bg-indigo-700 transition">Skicka bokning</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Info-modal -->
+  <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden z-40 flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 relative">
+      <button id="info-modal-close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <img id="info-modal-img" src="" alt="Profilbild" class="w-32 h-32 object-cover rounded-full shadow-lg" />
+        <div>
+          <h3 id="info-modal-name" class="text-2xl font-bold mb-2 text-gray-800"></h3>
+          <p class="text-yellow-500 mb-2"><span id="info-modal-rating"></span></p>
+          <p id="info-modal-phone" class="text-gray-600 mb-4"></p>
+          <p id="info-modal-desc" class="text-gray-800 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100">
+    <div class="container mx-auto px-6 py-6 text-center text-gray-600">
+      <p>Har du frågor? Kontakta oss på <a href="mailto:info@omsorgplus.se" class="text-indigo-600 hover:underline">info@omsorgplus.se</a></p>
+      <p class="mt-1 text-sm">© 2025 Omsorg Plus. Alla rättigheter förbehållna.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const API_STAFF = "http://localhost:5000/api/staff";
+      const API_BOOK  = "http://localhost:5000/api/bookings";
+      const staffListEl  = document.getElementById("staff-list");
+      const form         = document.getElementById("booking-form");
+      const staffSelect  = document.getElementById("staff-select");
+      const datetimeInput = document.getElementById("datetime");
+      const needInput    = document.getElementById("need");
+      const cityInput    = document.getElementById("city");
+      const bookingModal = document.getElementById("booking-modal");
+      const bookingClose = document.getElementById("modal-close");
+      const infoModal      = document.getElementById("info-modal");
+      const infoModalClose = document.getElementById("info-modal-close");
+      const infoModalImg   = document.getElementById("info-modal-img");
+      const infoModalName  = document.getElementById("info-modal-name");
+      const infoModalRating= document.getElementById("info-modal-rating");
+      const infoModalPhone = document.getElementById("info-modal-phone");
+      const infoModalDesc  = document.getElementById("info-modal-desc");
+      let picker;
+      let allStaff = [];
+
+      // Close modals
+      bookingClose.addEventListener("click", () => bookingModal.classList.add("hidden"));
+      infoModalClose.addEventListener("click", () => infoModal.classList.add("hidden"));
+
+      async function loadStaff() {
+        try {
+          const res = await fetch(API_STAFF);
+          if (!res.ok) throw new Error(res.status);
+          allStaff = await res.json();
+          renderStaff(allStaff);
+          allStaff.forEach(p => {
+            const opt = document.createElement("option");
+            opt.value = p.id;
+            opt.textContent = p.name;
+            staffSelect.appendChild(opt);
+          });
+        } catch (e) {
+          staffListEl.innerHTML = `<p class="text-center text-red-500">❌ Kunde inte ladda personal</p>`;
+        }
+      }
+
+      function renderStaff(list) {
+        staffListEl.innerHTML = "";
+        if (list.length === 0) {
+          staffListEl.innerHTML = `<p class="col-span-full text-center text-gray-600">Inga matchande träffar</p>`;
+          return;
+        }
+        list.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between card-hover cursor-pointer";
+          card.innerHTML = `
+            <div>
+              <h4 class="text-xl font-semibold mb-2 text-gray-800">${p.name}</h4>
+              <p class="text-gray-600 mb-2">${p.role}</p>
+              <p class="text-yellow-500">⭐ ${p.rating?.toFixed(1) || "-"}</p>
+            </div>
+            <button class="book-btn bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition mt-4">Boka tid</button>
+          `;
+
+          // Boka-knapp
+          card.querySelector(".book-btn").addEventListener("click", e => {
+            e.stopPropagation();
+            openBookingModal(p.id);
+          });
+
+          // Info-modal
+          card.addEventListener("click", () => {
+            // Profil för Fredrik
+            if (p.name === "Fredrik Lannernas") {
+              infoModalImg.src      = "images/fredrik.png";
+              infoModalImg.alt      = p.name;
+              infoModalName.textContent   = p.name;
+              infoModalRating.textContent = `⭐ ${p.rating?.toFixed(1) || "-"}`;
+              infoModalPhone.textContent  = `Telefon: ${p.phone || "070-123 45 67"}`;
+              infoModalDesc.textContent   =
+                "Fredrik Lennernäs är en duktig handbollsspelare i Uppsala HK. Utöver handbollen vikarierar han på Sunnerstaskolan och brinner för matlagning.";
+              infoModal.classList.remove("hidden");
+            }
+          });
+
+          staffListEl.appendChild(card);
+        });
+      }
+
+      function applyFilter() {
+        const need  = needInput.value.toLowerCase();
+        const city  = cityInput.value.toLowerCase();
+        const filtered = allStaff.filter(p => {
+          const matchesNeed = p.role.toLowerCase().includes(need) || p.name.toLowerCase().includes(need);
+          const matchesCity = !city || (p.city && p.city.toLowerCase().includes(city));
+          return matchesNeed && matchesCity;
+        });
+        renderStaff(filtered);
+      }
+      needInput.addEventListener("input", applyFilter);
+      cityInput.addEventListener("input", applyFilter);
+
+      function openBookingModal(staffId) {
+        bookingModal.classList.remove("hidden");
+        staffSelect.value = staffId;
+        if (picker) picker.destroy();
+        picker = flatpickr(datetimeInput, { enableTime: true, dateFormat: "Y-m-d H:i", minDate: "today", minTime: "07:00", maxTime: "18:00" });
+      }
+
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const payload = {
+          staffId: data.get("staffId"),
+          datetime: data.get("datetime"),
+          address: data.get("address"),
+          userEmail: data.get("userEmail"),
+        };
+        try {
+          await fetch(API_BOOK, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          form.innerHTML = `
+            <div class="text-center py-8">
+              <h4 class="text-2xl font-semibold mb-4">Tack! Din bokning är mottagen.</h4>
+              <p>Vi återkommer snart.</p>
+            </div>
+          `;
+        } catch (err) {
+          form.innerHTML = `
+            <div class="text-center py-8">
+              <p class="text-red-500 mb-4">Något gick fel vid bokningen. Försök igen senare.</p>
+            </div>
+          `;
+        }
+      });
+
+      loadStaff();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omsorg Plus – Hem</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Karusell-stilar */
+    .carousel { overflow: hidden; position: relative; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-slide { min-width: 100%; box-sizing: border-box; padding: 1rem; }
+    .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border:none; padding:0.5rem; border-radius:9999px; cursor:pointer; }
+    .carousel-button.prev { left:1rem; }
+    .carousel-button.next { right:1rem; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="bg-black text-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Omsorg Plus</h1>
+      <nav class="space-x-6">
+        <a href="#hero" class="hover:text-gray-300">Startsida</a>
+        <a href="staff.html" class="hover:text-gray-300">Vår personal</a>
+        <a href="omdomen.html" class="hover:text-gray-300">Omdömen</a>
+          <a href="about.html" class="hover:text-indigo-600">Om oss</a>
+      </nav>
+      <button class="bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700">Logga in</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="bg-indigo-600 text-white py-24">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-5xl lg:text-6xl font-bold mb-4">Välkommen till Omsorg Plus</h2>
+      <p class="mb-8 text-xl lg:text-2xl">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
+      <div class="space-x-4">
+        <a href="staff.html" class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100">Boka nu</a>
+        <a href="about.html" class="px-6 py-2 border border-white rounded-full hover:bg-white hover:text-indigo-600">Om oss</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-6 py-16 flex-1 space-y-20">
+    <!-- Omdömen -->
+    <section id="omdomen">
+      <h2 class="text-2xl font-semibold mb-8 text-center">Vad våra kunder säger</h2>
+      <div class="carousel relative">
+        <button class="carousel-button prev">❮</button>
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <p class="italic text-gray-700 mb-4">“Jag är så nöjd med Omsorg Plus! Min mamma älskar sin hjälpare, som alltid är punktlig och omtänksam.”</p>
+              <p class="font-bold text-indigo-600">Anna Svensson</p>
+              <p class="text-sm text-gray-500">Uppsala</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <p class="italic text-gray-700 mb-4">“Betygssystemet gör det superenkelt att hitta rätt hjälp. Rekommenderar varmt!”</p>
+              <p class="font-bold text-indigo-600">Erik Johansson</p>
+              <p class="text-sm text-gray-500">Uppsala</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <p class="italic text-gray-700 mb-4">“Tydliga omdömen och flexibel bokning har verkligen underlättat vardagen för vår familj.”</p>
+              <p class="font-bold text-indigo-600">Maria Karlsson</p>
+              <p class="text-sm text-gray-500">Uppsala</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-button next">❯</button>
+      </div>
+    </section>
+
+    <!-- Vår personal -->
+    <section id="personal" class="space-y-6">
+      <h2 class="text-2xl font-semibold">Vår personal</h2>
+      <div id="staff-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
+    </section>
+
+    <!-- Frågeformulär (förfrågan) -->
+<section id="inquiry" class="bg-white rounded-2xl shadow-lg mx-auto p-8 max-w-3xl mb-12">
+  <h3 class="text-2xl font-semibold mb-4 text-center text-gray-800">
+    Har du en fråga?
+  </h3>
+  <form id="inquiry-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input
+      type="text" name="name"
+      placeholder="Ditt namn"
+      class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
+      required
+    />
+    <input
+      type="email" name="email"
+      placeholder="Din e-post"
+      class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
+      required
+    />
+    <textarea
+      name="question"
+      placeholder="Vad vill du fråga om?"
+      rows="3"
+      class="col-span-1 md:col-span-2 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
+      required
+    ></textarea>
+    <button
+      type="submit"
+      class="md:col-span-2 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
+    >
+      Skicka fråga
+    </button>
+  </form>
+</section>
+
+
+
+    <!-- Karta -->
+    <section class="mt-12 text-center">
+      <h3 class="text-2xl font-semibold mb-6">Vi finns över hela Uppsala</h3>
+      <div class="w-full h-72 md:h-80 mx-auto px-4">
+        <iframe
+          class="w-full h-full rounded-2xl shadow-lg"
+          src="https://maps.google.com/maps?q=Uppsala&amp;output=embed"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white">
+    <div class="container mx-auto px-6 py-4 text-center">
+      <p>Har du frågor? Kontakta oss på <a href="mailto:info@omsorgplus.se" class="underline hover:text-indigo-300">info@omsorgplus.se</a></p>
+      <p class="mt-1 text-sm">© 2025 Omsorg Plus. Alla rättigheter förbehållna.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("inquiry-form");
+  const API_CONTACT = "http://localhost:5000/api/contact";
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const payload = {
+      name:     data.get("name"),
+      email:    data.get("email"),
+      question: data.get("question")
+    };
+
+    try {
+      const res = await fetch(API_CONTACT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(res.statusText);
+
+      // Visa bekräftelse
+      form.innerHTML = `
+        <div class="text-center py-8">
+          <h4 class="text-2xl font-bold mb-4">Tack för din fråga!</h4>
+          <p>Vi återkommer så snart vi kan.</p>
+        </div>`;
+    } catch (err) {
+      console.error("Fel vid skick av fråga:", err);
+      form.innerHTML = `
+        <div class="text-center py-8">
+          <p class="text-red-500">Ett fel uppstod. Försök igen senare.</p>
+        </div>`;
+    }
+  });
+});
+</script>
+
+
+</body>
+</html>

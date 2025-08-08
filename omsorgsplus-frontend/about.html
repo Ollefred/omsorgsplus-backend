@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omsorg Plus – Om oss</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="hero-gradient text-white">
+    <div class="container mx-auto px-6 py-6 flex items-center justify-between">
+      <h1 class="text-3xl font-bold cursor-pointer" onclick="location.href='index.html'">Omsorg Plus</h1>
+      <nav class="flex space-x-6 text-lg">
+        <a href="index.html" class="hover:text-indigo-200 transition">Startsida</a>
+        <a href="staff.html" class="hover:text-indigo-200 transition">Vår personal</a>
+        <a href="about.html" class="underline decoration-white underline-offset-4">Om oss</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-gradient text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-5xl font-extrabold mb-4">Om oss</h2>
+      <p class="text-xl max-w-3xl mx-auto opacity-90">
+        Vi är två engagerade unga entreprenörer som brinner för att skapa verklig förändring i äldreomsorgen. Vi tror att ökad konkurrens leder till högre kvalitet och bättre service – och därför har vi byggt en helt ny plattform där kompetenta ungdomar får möjlighet att hjälpa äldre med vardagssysslor.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="space-y-4">
+        <h3 class="text-3xl font-semibold text-indigo-600">Vår vision</h3>
+        <p>
+          Vår vision är att skapa långsiktiga relationer mellan generationer. Genom att minska barriären mellan yngre och äldre vill vi främja social gemenskap på ett sätt som traditionell hemtjänst sällan gör. Här får du inte bara praktisk assistans – du får också en varm samtalspartner som sprider glädje i vardagen.
+        </p>
+      </div>
+      <div class="space-y-4">
+        <h3 class="text-3xl font-semibold text-indigo-600">Vårt uppdrag</h3>
+        <p>
+          Genom vårt betygs- och omdömessystem säkerställer vi att du som kund alltid får den bästa möjliga hjälpen. Hjälparna matchas efter både erfarenhet och personliga egenskaper, och genom öppna omdömen kan du känna dig trygg med att servicen håller en hög och jämn standard.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Milestones -->
+  <section class="bg-white py-16">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-semibold text-center mb-12">Vår resa</h3>
+      <div class="space-y-8">
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm">2025</div>
+          <p>Grundades av två ambitiösa studenter med en vision om yngre i omsorg.</p>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm">2027</div>
+          <p>1 000 nöjda kunder över 5 olika städer</p>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm">2030</div>
+          <p>OmsorgPlus verkar över hela landet och välmåendet bland äldre och yngre har ökat</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tjanster" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+      Detta erbjuder vi
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Rad 1 -->
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🍳</span>
+        <span class="text-lg font-medium">Matlagning</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🧹</span>
+        <span class="text-lg font-medium">Städning</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🥣</span>
+        <span class="text-lg font-medium">Sophantering</span>
+      </div>
+
+      <!-- Rad 2 -->
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🏋️‍♂️</span>
+        <span class="text-lg font-medium">Personlig tränare</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🌿</span>
+        <span class="text-lg font-medium">Trädgårdsskötsel</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🛒</span>
+        <span class="text-lg font-medium">Ärendehjälp</span>
+      </div>
+
+      <!-- Rad 3 -->
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🧺</span>
+        <span class="text-lg font-medium">Tvätt & vikning</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🤝</span>
+        <span class="text-lg font-medium">Sällskap</span>
+      </div>
+      <!-- Det här ska vara 9:e elementet -->
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">📦</span>
+        <span class="text-lg font-medium">Brev- & Paketservice</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Slut här -->
+
+
+  <!-- Call to Action -->
+  <section class="container mx-auto px-6 py-16 text-center">
+    <h3 class="text-3xl font-semibold mb-4">Redo att prova något nytt?</h3>
+    <p class="mb-6">Bli en del av vår plattform – antingen som kund eller hjälpare.</p>
+    <a href="staff.html" class="bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition">Utforska vår personal</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100">
+    <div class="container mx-auto px-6 py-6 text-center text-gray-600">
+      <p>Har du frågor? Kontakta oss på <a href="mailto:info@omsorgplus.se" class="text-indigo-600 hover:underline">info@omsorgplus.se</a></p>
+      <p class="mt-1 text-sm">© 2025 Omsorg Plus. Alla rättigheter förbehållna.</p>
+    </div>
+  </footer>
+</body>
+</html>
