@@ -100,8 +100,9 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const API_STAFF = "http://localhost:5000/api/staff";
-      const API_BOOK  = "http://localhost:5000/api/bookings";
+const API_STAFF = "/api/staff";
+const API_BOOK  = "/api/bookings";
+
       const staffListEl  = document.getElementById("staff-list");
       const form         = document.getElementById("booking-form");
       const staffSelect  = document.getElementById("staff-select");

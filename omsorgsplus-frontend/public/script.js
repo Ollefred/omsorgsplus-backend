@@ -1,6 +1,7 @@
 // ----- script.js -----
 // 1) Bas‐URL till ditt staff‐API
-const API = "http://localhost:5000/api/staff";
+const API_CONTACT = "/api/contact";
+
 
 let allStaff = [];
 

@@ -29,6 +29,18 @@ app.use("/api/contact",  contactRoutes);
 const MONGO_URL = process.env.MONGO_URL;
 const PORT      = process.env.PORT || 5000;
 
+const path = require("path");
+
+// Servera statiska filer (din frontend)
+app.use(express.static(path.join(__dirname, "public")));
+
+// (valfritt) fånga alla icke-API GET:er och skicka index.html
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) return next();
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true

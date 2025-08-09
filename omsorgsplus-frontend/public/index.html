@@ -145,7 +145,8 @@
   <script>
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("inquiry-form");
-  const API_CONTACT = "http://localhost:5000/api/contact";
+  const API_CONTACT = "/api/contact";
+
 
   form.addEventListener("submit", async e => {
     e.preventDefault();

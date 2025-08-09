@@ -6,7 +6,8 @@ const id     = params.get("id");
 console.log("👉 Det här är id som används:", id);
 
 // 2) Bas-URL mot ditt API
-const API = "http://localhost:5000/api/staff";
+const API_CONTACT = "/api/contact";
+
 
 async function showProfile() {
   try {
