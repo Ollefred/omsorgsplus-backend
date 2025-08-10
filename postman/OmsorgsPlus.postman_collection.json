@@ -1,0 +1,113 @@
+{
+  "info": {
+    "name": "OmsorgsPlus API",
+    "_postman_id": "c6f2a2a0-0f55-4f3f-a1d1-ops-omsorgsplus",
+    "description": "Snabbtest av OmsorgsPlus API (Render).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://omsorgsplus.se"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/healthz"
+      }
+    },
+    {
+      "name": "Staff – list",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/staff"
+      }
+    },
+    {
+      "name": "Staff – get by id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/staff/{{id}}"
+      },
+      "response": []
+    },
+    {
+      "name": "Staff – create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Anna\", \"role\": \"Sjuksk\\u00f6terska\", \"experience\": 5}"
+        },
+        "url": "{{baseUrl}}/api/staff"
+      }
+    },
+    {
+      "name": "Staff – rate",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"rating\": 5}"
+        },
+        "url": "{{baseUrl}}/api/staff/{{id}}/rating"
+      }
+    },
+    {
+      "name": "Bookings – create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"staffId\": \"<staffId>\", \"datetime\": \"2025-08-20T10:00:00.000Z\", \"need\": \"Hemtj\\u00e4nst\", \"address\": \"Sveav\\u00e4gen 1, Stockholm\", \"userEmail\": \"kund@example.com\"}"
+        },
+        "url": "{{baseUrl}}/api/bookings"
+      }
+    },
+    {
+      "name": "Contact – ping",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/contact"
+      }
+    },
+    {
+      "name": "Contact – send",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Test Testsson\", \"email\": \"kund@example.com\", \"question\": \"Hej! Jag \\u00e4r intresserad av hj\\u00e4lp.\"}"
+        },
+        "url": "{{baseUrl}}/api/contact"
+      }
+    }
+  ]
+}
