@@ -57,20 +57,22 @@ app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(publicDir, 'index.html'));
 });
 
-// Start/DB
-const { MONGO_URL } = process.env;
+// --- Starta servern först ---
 const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🌐 Servern kör på port ${PORT}`));
 
+// Health (GET + HEAD så Render alltid får 200 snabbt)
+app.get('/healthz', (req, res) => res.json({ ok: true }));
+app.head('/healthz', (req, res) => res.sendStatus(200));
+
+// --- Anslut MongoDB i bakgrunden, med timeout ---
+const { MONGO_URL } = process.env;
 if (!MONGO_URL) {
   console.error('❌ MONGO_URL saknas i .env');
-  process.exit(1);
+} else {
+  mongoose
+    .connect(MONGO_URL, { serverSelectionTimeoutMS: 10000 })
+    .then(() => console.log('✅ Ansluten till MongoDB'))
+    .catch(err => console.error('❌ MongoDB-anslutning misslyckades:', err));
 }
 
-try {
-  await mongoose.connect(MONGO_URL);
-  console.log('✅ Ansluten till MongoDB');
-  app.listen(PORT, () => console.log(`🌐 Servern kör på port ${PORT}`));
-} catch (err) {
-  console.error('❌ MongoDB-anslutning misslyckades:', err);
-  process.exit(1);
-}
