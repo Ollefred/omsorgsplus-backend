@@ -8,6 +8,23 @@ import { fileURLToPath } from 'node:url';
 
 const app = express();
 
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import morgan from 'morgan';
+import cors from 'cors';
+
+app.set('trust proxy', 1);
+app.use(helmet());
+app.use(rateLimit({ windowMs: 15*60*1000, limit: 300, standardHeaders: true }));
+app.use(mongoSanitize());
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+app.use(cors({ origin: process.env.FRONTEND_URL || 'https://omsorgsplus.se', credentials: true }));
+
+// healthcheck
+app.get('/healthz', (req, res) => res.json({ ok: true }));
+
+
 // --- __dirname/__filename i ESM ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
