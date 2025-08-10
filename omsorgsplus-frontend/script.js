@@ -88,3 +88,5 @@ document.getElementById("city").addEventListener("input", filterStaff);
 
 // 6) Kicka igång
 loadStaff();
+
+
