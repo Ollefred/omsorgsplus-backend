@@ -62,4 +62,33 @@ Kundmejl:     ${userEmail}
   }
 });
 
+// === Lägg till i routes/bookings.js ===
+// Lista alla bokningar
+router.get('/', async (req, res) => {
+  try {
+    const list = await Booking.find().sort({ createdAt: -1 });
+    res.json(list);
+  } catch (err) {
+    console.error('Fel vid listning av bokningar:', err);
+    res.status(500).json({ error: 'Serverfel vid hämtning av bokningar' });
+  }
+});
+
+// Hämta en bokning på id
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Ogiltigt id' });
+    }
+    const booking = await Booking.findById(id);
+    if (!booking) return res.status(404).json({ error: 'Bokning hittades inte' });
+    res.json(booking);
+  } catch (err) {
+    console.error('Fel vid hämtning av bokning:', err);
+    res.status(500).json({ error: 'Serverfel vid hämtning av bokning' });
+  }
+});
+
+
 export default router;
