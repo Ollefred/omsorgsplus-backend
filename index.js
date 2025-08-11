@@ -17,7 +17,6 @@ app.set('trust proxy', 1);
 app.use(express.json());
 app.use(helmet());
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300, standardHeaders: true, legacyHeaders: false }));
-app.use(mongoSanitize());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
 
