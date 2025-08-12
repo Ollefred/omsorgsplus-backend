@@ -20,7 +20,28 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300, standardHeaders: true,
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
 
-app.get('/', (req, res) => res.status(200).send('OmsorgsPlus API igång (phase 2)'));
+
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const publicDir = path.join(__dirname, 'public');
+const indexHtml = path.join(publicDir, 'index.html');
+
+// Servera allt i /public (index.html, booking.html, bilder, js, css)
+app.use(express.static(publicDir));
+
+// Fallback för alla icke-API-vägar (valfritt men bra)
+app.get(/^\/(?!api|healthz).*/, (req, res) => {
+  if (fs.existsSync(indexHtml)) return res.sendFile(indexHtml);
+  return res.status(200).send('API online');
+});
+
+
+
 
 const loadRoutes = async () => {
   try {
