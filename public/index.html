@@ -15,6 +15,19 @@
     .carousel-button.prev { left:1rem; }
     .carousel-button.next { right:1rem; }
   </style>
+<style>
+  /* Glow + lätt “float” */
+  @keyframes floatY { 
+    0%,100% { transform: translateY(0) }
+    50%     { transform: translateY(-6px) }
+  }
+  .promo-glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+</style>
+
+
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
   <!-- Header -->
@@ -32,18 +45,62 @@
   </header>
 
   <!-- Hero -->
-  <section id="hero" class="bg-indigo-600 text-white py-24">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-5xl lg:text-6xl font-bold mb-4">Välkommen till Omsorg Plus</h2>
-      <p class="mb-8 text-xl lg:text-2xl">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
-      <div class="space-x-4">
-        <a href="staff.html" class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100">Boka nu</a>
-        <a href="about.html" class="px-6 py-2 border border-white rounded-full hover:bg-white hover:text-indigo-600">Om oss</a>
-      </div>
+ <div class="container mx-auto px-6 text-center relative">
+  <!-- Vänster cirkel (desktop) -->
+  <div
+    aria-label="Hösterbjudande: Häckklippning"
+    class="hidden lg:flex items-center justify-center
+           promo-glass absolute -left-6 top-8 xl:-left-10
+           h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
+           animate-[floatY_6s_ease-in-out_infinite]">
+    <div class="text-white px-6">
+      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
+      <p class="text-lg font-bold leading-tight">Häckklippning</p>
+      <p class="text-sm opacity-90">Alla era häckar</p>
+      <p class="mt-1 text-base font-semibold">Fast pris <span class="whitespace-nowrap">799 kr</span></p>
     </div>
-  </section>
+  </div>
 
-  <main class="container mx-auto px-6 py-16 flex-1 space-y-20">
+  <!-- Höger cirkel (desktop) -->
+  <div
+    aria-label="Hösterbjudande: Äppelmust"
+    class="hidden lg:flex items-center justify-center
+           promo-glass absolute -right-6 top-40 xl:-right-10
+           h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
+           animate-[floatY_7s_ease-in-out_infinite]">
+    <div class="text-white px-6">
+      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
+      <p class="text-lg font-bold leading-tight">Äppelmust</p>
+      <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
+      <p class="mt-1 text-base font-semibold"><span class="whitespace-nowrap">799 kr</span></p>
+    </div>
+  </div>
+
+  <!-- Ordinarie hero-copy/CTA -->
+  <h2 class="text-5xl lg:text-6xl font-bold mb-4">Välkommen till Omsorg Plus</h2>
+  <p class="mb-8 text-xl lg:text-2xl">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
+  <div class="space-x-4">
+    <a href="staff.html" class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100">Boka nu</a>
+    <a href="about.html" class="px-6 py-2 border border-white rounded-full hover:bg-white hover:text-indigo-600">Om oss</a>
+  </div>
+
+  <!-- Mobil/Tablet-version (stackad under CTA) -->
+  <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
+    <div class="promo-glass rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-6 text-white text-center">
+      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
+      <p class="text-lg font-bold leading-tight">Häckklippning</p>
+      <p class="text-sm opacity-90">Alla era häckar</p>
+      <p class="mt-1 text-base font-semibold">Fast pris 799 kr</p>
+    </div>
+    <div class="promo-glass rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-6 text-white text-center">
+      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
+      <p class="text-lg font-bold leading-tight">Äppelmust</p>
+      <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
+      <p class="mt-1 text-base font-semibold">799 kr</p>
+    </div>
+  </div>
+</div>
+
     <!-- Omdömen -->
     <section id="omdomen">
       <h2 class="text-2xl font-semibold mb-8 text-center">Vad våra kunder säger</h2>

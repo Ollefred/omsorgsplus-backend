@@ -90,3 +90,73 @@ document.getElementById("city").addEventListener("input", filterStaff);
 loadStaff();
 
 
+const API_BASE = 'https://omsorgsplus.se'; // eller onrender-urlen
+
+async function postJSON(url, data) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(`Fel ${res.status}: ${txt || res.statusText}`);
+  }
+  return res.json().catch(() => ({}));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const payload = {
+        name: f.name.value.trim(),
+        email: f.email.value.trim(),
+        question: f.question.value.trim(),
+        website: f.website?.value || '' // honeypot
+      };
+      const btn = f.querySelector('[type=submit]');
+      btn.disabled = true;
+      try {
+        await postJSON(`${API_BASE}/api/contact`, payload);
+        alert('Tack! Vi återkommer.');
+        f.reset();
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const payload = {
+        staffId: f.staffId.value.trim(),
+        // konvertera till ISO (backend accepterar ISO)
+        datetime: new Date(f.datetime.value).toISOString(),
+        need: f.need.value.trim(),
+        address: f.address.value.trim(),
+        userEmail: f.userEmail.value.trim(),
+      };
+      const btn = f.querySelector('[type=submit]');
+      btn.disabled = true;
+      try {
+        await postJSON(`${API_BASE}/api/bookings`, payload);
+        alert('Bokningen skickades!');
+        f.reset();
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+});
