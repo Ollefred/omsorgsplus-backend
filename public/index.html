@@ -6,29 +6,28 @@
   <title>Omsorg Plus – Hem</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    /* Karusell-stilar */
+    /* Karusell-stilar (oförändrat) */
     .carousel { overflow: hidden; position: relative; }
     .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
     .carousel-slide { min-width: 100%; box-sizing: border-box; padding: 1rem; }
     .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border:none; padding:0.5rem; border-radius:9999px; cursor:pointer; }
     .carousel-button.prev { left:1rem; }
     .carousel-button.next { right:1rem; }
+
+    /* Diskret glow + lätt “float” för cirklarna */
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+    .promo-glass {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
   </style>
-<style>
-  /* Glow + lätt “float” */
-  @keyframes floatY { 
-    0%,100% { transform: translateY(0) }
-    50%     { transform: translateY(-6px) }
-  }
-  .promo-glass {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-</style>
-
-
 </head>
+
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
   <!-- Header -->
   <header class="bg-black text-white shadow-md">
@@ -38,71 +37,76 @@
         <a href="#hero" class="hover:text-gray-300">Startsida</a>
         <a href="staff.html" class="hover:text-gray-300">Vår personal</a>
         <a href="omdomen.html" class="hover:text-gray-300">Omdömen</a>
-          <a href="about.html" class="hover:text-indigo-600">Om oss</a>
+        <a href="about.html" class="hover:text-indigo-600">Om oss</a>
       </nav>
       <button class="bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700">Logga in</button>
     </div>
   </header>
 
-  <!-- Hero -->
- <div class="container mx-auto px-6 text-center relative">
-  <!-- Vänster cirkel (desktop) -->
-  <div
-    aria-label="Hösterbjudande: Häckklippning"
-    class="hidden lg:flex items-center justify-center
-           promo-glass absolute -left-6 top-8 xl:-left-10
-           h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
-           animate-[floatY_6s_ease-in-out_infinite]">
-    <div class="text-white px-6">
-      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
-      <p class="text-lg font-bold leading-tight">Häckklippning</p>
-      <p class="text-sm opacity-90">Alla era häckar</p>
-      <p class="mt-1 text-base font-semibold">Fast pris <span class="whitespace-nowrap">799 kr</span></p>
-    </div>
-  </div>
+  <main class="flex-1">
+    <!-- Hero (oförändrat innehåll + overlay-cirklar) -->
+    <section id="hero" class="relative">
+      <div class="container mx-auto px-6 text-center py-14 lg:py-20">
+        <h2 class="text-5xl lg:text-6xl font-bold mb-4 text-gray-900">Välkommen till Omsorg Plus</h2>
+        <p class="mb-8 text-xl lg:text-2xl text-gray-700">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
+        <div class="flex items-center justify-center gap-4">
+          <a href="staff.html" class="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-gray-900">Boka nu</a>
+          <a href="about.html" class="px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white">Om oss</a>
+        </div>
+      </div>
 
-  <!-- Höger cirkel (desktop) -->
-  <div
-    aria-label="Hösterbjudande: Äppelmust"
-    class="hidden lg:flex items-center justify-center
-           promo-glass absolute -right-6 top-40 xl:-right-10
-           h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
-           animate-[floatY_7s_ease-in-out_infinite]">
-    <div class="text-white px-6">
-      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
-      <p class="text-lg font-bold leading-tight">Äppelmust</p>
-      <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
-      <p class="mt-1 text-base font-semibold"><span class="whitespace-nowrap">799 kr</span></p>
-    </div>
-  </div>
+      <!-- Cirklarna: absolut position på desktop, påverkar inte layouten -->
+      <!-- Vänster cirkel (lg+) -->
+      <div
+        class="hidden lg:flex items-center justify-center promo-glass
+               absolute left-0 -translate-x-1/3 top-10
+               h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
+               animate-[floatY_6s_ease-in-out_infinite] select-none"
+        aria-label="Hösterbjudande – Häckklippning: alla era häckar – fast pris 799 kr">
+        <div class="text-white px-6 text-center leading-snug">
+          <p class="text-[11px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+          <p class="text-lg font-bold">Häckklippning</p>
+          <p class="text-sm opacity-90">Alla era häckar</p>
+          <p class="mt-1 text-base font-semibold">Fast pris 799&nbsp;kr</p>
+        </div>
+      </div>
 
-  <!-- Ordinarie hero-copy/CTA -->
-  <h2 class="text-5xl lg:text-6xl font-bold mb-4">Välkommen till Omsorg Plus</h2>
-  <p class="mb-8 text-xl lg:text-2xl">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
-  <div class="space-x-4">
-    <a href="staff.html" class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100">Boka nu</a>
-    <a href="about.html" class="px-6 py-2 border border-white rounded-full hover:bg-white hover:text-indigo-600">Om oss</a>
-  </div>
+      <!-- Höger cirkel (lg+) -->
+      <div
+        class="hidden lg:flex items-center justify-center promo-glass
+               absolute right-0 translate-x-1/3 top-32
+               h-48 w-48 rounded-full bg-white/10 ring-1 ring-white/30 shadow-2xl
+               animate-[floatY_7s_ease-in-out_infinite] select-none"
+        aria-label="Hösterbjudande – Äppelmust: vi mustar alla era äpplen – 799 kr">
+        <div class="text-white px-6 text-center leading-snug">
+          <p class="text-[11px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+          <p class="text-lg font-bold">Äppelmust</p>
+          <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
+          <p class="mt-1 text-base font-semibold">799&nbsp;kr</p>
+        </div>
+      </div>
 
-  <!-- Mobil/Tablet-version (stackad under CTA) -->
-  <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
-    <div class="promo-glass rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-6 text-white text-center">
-      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
-      <p class="text-lg font-bold leading-tight">Häckklippning</p>
-      <p class="text-sm opacity-90">Alla era häckar</p>
-      <p class="mt-1 text-base font-semibold">Fast pris 799 kr</p>
-    </div>
-    <div class="promo-glass rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-6 text-white text-center">
-      <p class="text-xs uppercase tracking-widest/relaxed opacity-80">Hösterbjudande</p>
-      <p class="text-lg font-bold leading-tight">Äppelmust</p>
-      <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
-      <p class="mt-1 text-base font-semibold">799 kr</p>
-    </div>
-  </div>
-</div>
+      <!-- Mobil/tablet: små cirklar under heron (påverkar inte desktop) -->
+      <div class="lg:hidden container mx-auto px-6 -mt-4 pb-6">
+        <div class="flex items-center justify-center gap-4">
+          <div class="promo-glass h-32 w-32 rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-4 text-white text-center">
+            <p class="text-[10px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+            <p class="text-base font-bold leading-tight">Häckklippning</p>
+            <p class="text-xs opacity-90">Alla era häckar</p>
+            <p class="mt-1 text-sm font-semibold">Fast pris 799&nbsp;kr</p>
+          </div>
+          <div class="promo-glass h-32 w-32 rounded-full bg-white/10 ring-1 ring-white/30 shadow-xl p-4 text-white text-center">
+            <p class="text-[10px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+            <p class="text-base font-bold leading-tight">Äppelmust</p>
+            <p class="text-xs opacity-90">Vi mustar era äpplen</p>
+            <p class="mt-1 text-sm font-semibold">799&nbsp;kr</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Omdömen -->
-    <section id="omdomen">
+    <section id="omdomen" class="container mx-auto px-6 py-10">
       <h2 class="text-2xl font-semibold mb-8 text-center">Vad våra kunder säger</h2>
       <div class="carousel relative">
         <button class="carousel-button prev">❮</button>
@@ -134,67 +138,36 @@
     </section>
 
     <!-- Vår personal -->
-    <section id="personal" class="space-y-6">
+    <section id="personal" class="container mx-auto px-6 pb-10 space-y-6">
       <h2 class="text-2xl font-semibold">Vår personal</h2>
       <div id="staff-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
     </section>
 
     <!-- Frågeformulär (förfrågan) -->
-<section id="inquiry" class="bg-white rounded-2xl shadow-lg mx-auto p-8 max-w-3xl mb-12">
-  <h3 class="text-2xl font-semibold mb-4 text-center text-gray-800">
-    Har du en fråga?
-  </h3>
-  <form id="inquiry-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <input
-      type="text" name="name"
-      placeholder="Ditt namn"
-      class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
-      required
-    />
-    <input
-      type="email" name="email"
-      placeholder="Din e-post"
-      class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
-      required
-    />
-    <textarea
-      name="question"
-      placeholder="Vad vill du fråga om?"
-      rows="3"
-      class="col-span-1 md:col-span-2 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200"
-      required
-    ></textarea>
-    <button
-      type="submit"
-      class="md:col-span-2 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
-    >
-      Skicka fråga
-    </button>
-  </form>
-</section>
+    <section id="inquiry" class="bg-white rounded-2xl shadow-lg mx-auto p-8 max-w-3xl mb-12">
+      <h3 class="text-2xl font-semibold mb-4 text-center text-gray-800">Har du en fråga?</h3>
+      <form id="inquiry-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" name="name" placeholder="Ditt namn" class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200" required />
+        <input type="email" name="email" placeholder="Din e-post" class="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200" required />
+        <textarea name="question" placeholder="Vad vill du fråga om?" rows="3" class="col-span-1 md:col-span-2 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-200" required></textarea>
+        <button type="submit" class="md:col-span-2 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">Skicka fråga</button>
+      </form>
+    </section>
 
-<form id="contactForm">
-  <input name="name" required />
-  <input name="email" type="email" required />
-  <textarea name="question" required></textarea>
-  <input name="website" type="text" style="display:none" tabindex="-1" autocomplete="off" />
-  <button type="submit">Skicka</button>
-</form>
-
-
-
+    <!-- (Behåller även ditt separata kontaktformulär om du använder det i backend) -->
+    <form id="contactForm" class="hidden">
+      <input name="name" required />
+      <input name="email" type="email" required />
+      <textarea name="question" required></textarea>
+      <input name="website" type="text" style="display:none" tabindex="-1" autocomplete="off" />
+      <button type="submit">Skicka</button>
+    </form>
 
     <!-- Karta -->
-    <section class="mt-12 text-center">
+    <section class="mt-12 text-center container mx-auto px-6 pb-16">
       <h3 class="text-2xl font-semibold mb-6">Vi finns över hela Uppsala</h3>
-      <div class="w-full h-72 md:h-80 mx-auto px-4">
-        <iframe
-          class="w-full h-full rounded-2xl shadow-lg"
-          src="https://maps.google.com/maps?q=Uppsala&amp;output=embed"
-          frameborder="0"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <div class="w-full h-72 md:h-80 mx-auto">
+        <iframe class="w-full h-full rounded-2xl shadow-lg" src="https://maps.google.com/maps?q=Uppsala&amp;output=embed" frameborder="0" allowfullscreen loading="lazy"></iframe>
       </div>
     </section>
   </main>
@@ -209,45 +182,60 @@
 
   <!-- Scripts -->
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("inquiry-form");
-  const API_CONTACT = "/api/contact";
+    // Karusell (oförändrad logik)
+    (function () {
+      const track = document.querySelector(".carousel-track");
+      const slides = Array.from(document.querySelectorAll(".carousel-slide"));
+      const prevBtn = document.querySelector(".carousel-button.prev");
+      const nextBtn = document.querySelector(".carousel-button.next");
+      if (!track || slides.length === 0) return;
 
+      let index = 0;
+      function go(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = "translateX(" + (-index * 100) + "%)";
+      }
+      prevBtn && prevBtn.addEventListener("click", () => go(index - 1));
+      nextBtn && nextBtn.addEventListener("click", () => go(index + 1));
+    })();
 
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const payload = {
-      name:     data.get("name"),
-      email:    data.get("email"),
-      question: data.get("question")
-    };
+    // Frågeformulär – POST /api/contact (oförändrad men robustare null-guard)
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("inquiry-form");
+      if (!form) return;
 
-    try {
-      const res = await fetch(API_CONTACT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+      const API_CONTACT = "/api/contact";
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const payload = {
+          name: data.get("name"),
+          email: data.get("email"),
+          question: data.get("question"),
+        };
+
+        try {
+          const res = await fetch(API_CONTACT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(res.statusText);
+
+          form.innerHTML = `
+            <div class="text-center py-8">
+              <h4 class="text-2xl font-bold mb-4">Tack för din fråga!</h4>
+              <p>Vi återkommer så snart vi kan.</p>
+            </div>`;
+        } catch (err) {
+          console.error("Fel vid skick av fråga:", err);
+          form.innerHTML = `
+            <div class="text-center py-8">
+              <p class="text-red-500">Ett fel uppstod. Försök igen senare.</p>
+            </div>`;
+        }
       });
-      if (!res.ok) throw new Error(res.statusText);
-
-      // Visa bekräftelse
-      form.innerHTML = `
-        <div class="text-center py-8">
-          <h4 class="text-2xl font-bold mb-4">Tack för din fråga!</h4>
-          <p>Vi återkommer så snart vi kan.</p>
-        </div>`;
-    } catch (err) {
-      console.error("Fel vid skick av fråga:", err);
-      form.innerHTML = `
-        <div class="text-center py-8">
-          <p class="text-red-500">Ett fel uppstod. Försök igen senare.</p>
-        </div>`;
-    }
-  });
-});
-</script>
-
-
+    });
+  </script>
 </body>
 </html>
