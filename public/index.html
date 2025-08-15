@@ -76,82 +76,208 @@
 
   <main class="flex-1">
     <!-- Hero -->
-    <section id="hero" class="relative">
-      <div class="container mx-auto px-6 py-14">
-        <div class="mx-auto max-w-5xl text-center">
-          <h2 class="text-5xl lg:text-6xl font-bold mb-4 text-gray-900">Välkommen till Omsorg Plus</h2>
-          <p class="mb-8 text-xl lg:text-2xl text-gray-700">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
-
-          <!-- NY ILLUSTRATION – stil som referensbilder: ren 2D, tydliga linjer, platta färger -->
-          <div class="mx-auto max-w-3xl">
-            <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Yngre hjälpare står tryggt bredvid en äldre man. Båda ler och tittar framåt.">
-              <defs>
-                <linearGradient id="bgSoft" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#f8fafc"/>
-                  <stop offset="100%" stop-color="#eef2f7"/>
-                </linearGradient>
-              </defs>
-              <rect x="0" y="0" width="1000" height="600" fill="url(#bgSoft)"/>
-
-              <!-- skugga på marken -->
-              <ellipse cx="500" cy="540" rx="260" ry="22" fill="rgba(0,0,0,.08)"/>
-
-              <!-- ÄLDRE MAN (vänster) -->
-              <g transform="translate(250,130)">
-                <!-- kropp -->
-                <path d="M-30,170 q130 -60 260 0 v170 q-130 60 -260 0z" fill="#8aa2c6"/>
-                <path d="M-25,215 q125 -45 250 0" fill="none" stroke="#6e89b1" stroke-width="5"/>
-                <!-- huvud -->
-                <circle cx="95" cy="80" r="68" fill="#ffddb9" stroke="#d3a78b" stroke-width="4"/>
-                <!-- hår grått -->
-                <path d="M35,80 q22 -64 120 -54 q30 6 44 30 v20 h-164z" fill="#cfd6e3"/>
-                <!-- öron -->
-                <circle cx="30" cy="96" r="10" fill="#ffddb9"/>
-                <circle cx="160" cy="96" r="10" fill="#ffddb9"/>
-                <!-- ögon (referensstil: stora, enkla) -->
-                <g>
-                  <ellipse cx="75" cy="95" rx="12" ry="16" fill="#fff" stroke="#1f2937" stroke-width="4"/>
-                  <circle cx="75" cy="98" r="6" fill="#1f2937"/>
-                  <ellipse cx="115" cy="95" rx="12" ry="16" fill="#fff" stroke="#1f2937" stroke-width="4"/>
-                  <circle cx="115" cy="98" r="6" fill="#1f2937"/>
-                </g>
-                <!-- näsa + mun -->
-                <path d="M96 105 q6 14 0 22" stroke="#c48c6b" stroke-width="4" fill="none"/>
-                <path d="M76 135 q20 14 40 0" stroke="#b4603a" stroke-width="6" fill="none" stroke-linecap="round"/>
-                <!-- enkel käpp -->
-                <rect x="-55" y="170" width="10" height="150" rx="5" fill="#8b6a3e"/>
-              </g>
-
-              <!-- YNGRE MAN (höger) -->
-              <g transform="translate(560,130)">
-                <!-- kropp i orange tröja (som referens) -->
-                <path d="M-30,170 q130 -60 260 0 v170 q-130 60 -260 0z" fill="#f2994a"/>
-                <path d="M40,120 q50 20 100 0" stroke="#e5802c" stroke-width="6"/>
-                <!-- arm som vilar bakom äldre -->
-                <path d="M-10,200 q40 -20 80 -14 q22 3 26 18 q2 10 -8 16 q-24 16 -86 -2z" fill="#223056"/>
-                <!-- huvud -->
-                <circle cx="95" cy="80" r="68" fill="#ffd9c4" stroke="#d3a78b" stroke-width="4"/>
-                <!-- hår mörkt -->
-                <path d="M40,70 q22 -48 110 -40 q30 6 44 26 v24 h-154z" fill="#232b3f"/>
-                <!-- öron -->
-                <circle cx="30" cy="96" r="10" fill="#ffd9c4"/>
-                <circle cx="160" cy="96" r="10" fill="#ffd9c4"/>
-                <!-- ögon -->
-                <ellipse cx="75" cy="95" rx="12" ry="16" fill="#fff" stroke="#1f2937" stroke-width="4"/>
-                <circle cx="75" cy="98" r="6" fill="#1f2937"/>
-                <ellipse cx="115" cy="95" rx="12" ry="16" fill="#fff" stroke="#1f2937" stroke-width="4"/>
-                <circle cx="115" cy="98" r="6" fill="#1f2937"/>
-                <!-- mustasch (referensstil) -->
-                <path d="M70 118 q20 10 40 0" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
-                <!-- mun -->
-                <path d="M76 135 q20 12 40 0" stroke="#b65b3a" stroke-width="6" fill="none" stroke-linecap="round"/>
-              </g>
-            </svg>
+    <section id="hero" class="relative overflow-visible">
+      <div class="container mx-auto px-6 py-12 lg:py-16">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <!-- Left: copy & CTAs -->
+          <div class="text-center lg:text-left">
+            <h2 class="text-5xl lg:text-6xl font-bold mb-4 text-gray-900">Välkommen till Omsorg Plus</h2>
+            <p class="mb-8 text-xl lg:text-2xl text-gray-700">Hitta och betygsätt din hjälpare enkelt och tryggt.</p>
+            <div class="flex items-center justify-center lg:justify-start gap-4">
+              <a href="staff.html" class="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-gray-900">Boka nu</a>
+              <a href="about.html" class="px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white">Om oss</a>
+            </div>
           </div>
 
-          <div class="mt-8 flex items-center justify-center gap-4">
-            <a href="staff.html" class="bg-black text-white px-6 py-2 rounded-full font-semibold hover:bg-gray-900">Boka nu</a>
-            <a href="about.html" class="px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white">Om oss</a>
+          <!-- Right: improved, realistic duo illustration -->
+          <div class="duo-wrap">
+            <div class="duo-card aspect-[5/4] w-full max-w-[720px] mx-auto">
+              <svg viewBox="0 0 960 768" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ung hjälpare från Omsorg Plus med armen om äldre kund. Båda ler i trygg miljö.">
+                <defs>
+                  <!-- Ljus & texturer -->
+                  <radialGradient id="skinA" cx="50%" cy="35%" r="70%">
+                    <stop offset="0%" stop-color="#FFD9BE"/><stop offset="100%" stop-color="#E5B092"/>
+                  </radialGradient>
+                  <radialGradient id="skinB" cx="55%" cy="40%" r="70%">
+                    <stop offset="0%" stop-color="#FFD7C0"/><stop offset="100%" stop-color="#E0A98E"/>
+                  </radialGradient>
+                  <linearGradient id="hairGrey" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#D9DEE8"/><stop offset="100%" stop-color="#B8BFCE"/>
+                  </linearGradient>
+                  <linearGradient id="hairDark" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#232B3F"/><stop offset="100%" stop-color="#1B2235"/>
+                  </linearGradient>
+                  <linearGradient id="jacket" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#6d7aae"/><stop offset="100%" stop-color="#4e5e8e"/>
+                  </linearGradient>
+                  <linearGradient id="shirtBlue" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#223056"/><stop offset="100%" stop-color="#18223F"/>
+                  </linearGradient>
+                  <linearGradient id="pants" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#2B3348"/><stop offset="100%" stop-color="#161C2A"/>
+                  </linearGradient>
+                  <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="rgba(15,32,80,0.3)"/>
+                  </filter>
+                  <filter id="fabricPrint" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="1" seed="5" result="noise"/>
+                    <feColorMatrix type="saturate" values="0" in="noise" result="grain"/>
+                    <feBlend in="SourceGraphic" in2="grain" mode="multiply"/>
+                    <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                </defs>
+
+                <!-- Diskret bakgrund -->
+                <g class="floaty">
+                  <rect x="0" y="0" width="960" height="768" fill="url(#bg) " opacity="0"/>
+                  <ellipse cx="480" cy="700" rx="300" ry="26" fill="rgba(0,0,0,0.08)"/>
+                </g>
+
+                <!-- Äldre (vänster) -->
+                <g filter="url(#softShadow)">
+                  <!-- underkropp -->
+                  <rect x="300" y="420" width="32" height="140" rx="14" fill="url(#pants)"/>
+                  <rect x="350" y="420" width="32" height="140" rx="14" fill="url(#pants)"/>
+                  <ellipse cx="315" cy="560" rx="36" ry="12" fill="#131A29"/>
+                  <ellipse cx="365" cy="560" rx="36" ry="12" fill="#131A29"/>
+
+                  <!-- överkropp -->
+                  <g class="breath">
+                    <path d="M250,320 C320,270 430,270 500,320 L500,470 C430,510 320,510 250,470 Z" fill="url(#jacket)"/>
+                    <path d="M272,355 C330,338 420,338 478,355" stroke="rgba(255,255,255,0.15)" stroke-width="3" fill="none"/>
+                    <path d="M270,396 C330,380 420,380 480,396" stroke="rgba(0,0,0,0.14)" stroke-width="4" fill="none"/>
+                  </g>
+
+                  <!-- huvud -->
+                  <g class="tilt">
+                    <circle cx="390" cy="270" r="62" fill="url(#skinA)"/>
+                    <path d="M336,272 C360,220 420,220 444,272 L444,295 L336,295 Z" fill="url(#hairGrey)"/>
+                    <!-- öron -->
+                    <circle cx="328" cy="284" r="10" fill="url(#skinA)"/>
+                    <circle cx="452" cy="284" r="10" fill="url(#skinA)"/>
+                    <!-- ögon -->
+                    <g>
+                      <g transform="translate(368,280)">
+                        <rect x="-12" y="-4" width="24" height="8" rx="4" fill="#0f172a" class="blink-y"/>
+                        <circle class="pupils" cx="0" cy="0" r="2.2" fill="#ffffff" opacity="0.9"/>
+                      </g>
+                      <g transform="translate(410,280)">
+                        <rect x="-12" y="-4" width="24" height="8" rx="4" fill="#0f172a" class="blink-y"/>
+                        <circle class="pupils" cx="0" cy="0" r="2.2" fill="#ffffff" opacity="0.9"/>
+                      </g>
+                    </g>
+                    <!-- näsa + mun -->
+                    <path d="M388 288 q4 10 0 18" stroke="#C49278" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <path d="M370 316 q20 16 40 0" stroke="#B46C58" stroke-width="5" stroke-linecap="round" fill="none"/>
+                  </g>
+
+                  <!-- käpp -->
+                  <rect x="268" y="336" width="8" height="200" rx="4" fill="#8B6A3E"/>
+                  <circle cx="272" cy="336" r="9" fill="#D9D0C4"/>
+                </g>
+
+                <!-- Ung hjälpare (höger) -->
+                <g filter="url(#softShadow)">
+                  <!-- underkropp -->
+                  <rect x="560" y="420" width="32" height="140" rx="14" fill="url(#pants)"/>
+                  <rect x="610" y="420" width="32" height="140" rx="14" fill="url(#pants)"/>
+                  <ellipse cx="575" cy="560" rx="36" ry="12" fill="#131A29"/>
+                  <ellipse cx="625" cy="560" rx="36" ry="12" fill="#131A29"/>
+
+                  <!-- arm runt äldre -->
+                  <path d="M500,360 C528,354 562,360 580,370 C592,377 592,392 580,398 C556,410 528,410 504,402 Z" fill="url(#shirtBlue)"/>
+
+                  <!-- överkropp + tryck -->
+                  <g class="breath">
+                    <path id="shirt-shape" d="M530,320 C600,270 710,270 780,320 L780,470 C710,510 600,510 530,470 Z" fill="url(#shirtBlue)"/>
+                    <path id="print-arc" d="M575,405 C640,388 670,388 735,405" fill="none"/>
+                    <g filter="url(#fabricPrint)">
+                      <text font-family="Inter,system-ui,-apple-system,Segoe UI,Roboto" font-size="34" font-weight="700" fill="#FFFFFF">
+                        <textPath href="#print-arc" startOffset="50%" text-anchor="middle">Omsorg Plus</textPath>
+                      </text>
+                    </g>
+                  </g>
+
+                  <!-- huvud -->
+                  <g class="tilt">
+                    <circle cx="660" cy="270" r="62" fill="url(#skinB)"/>
+                    <path d="M622,258 C642,230 678,230 698,258 L698,286 L622,286 Z" fill="url(#hairDark)"/>
+                    <!-- öron -->
+                    <circle cx="610" cy="285" r="10" fill="url(#skinB)"/>
+                    <circle cx="710" cy="285" r="10" fill="url(#skinB)"/>
+                    <!-- ögon -->
+                    <g>
+                      <g transform="translate(640,282)">
+                        <rect x="-12" y="-4" width="24" height="8" rx="4" fill="#0b1220" class="blink-y"/>
+                        <circle class="pupils" cx="0" cy="0" r="2.2" fill="#ffffff" opacity="0.9"/>
+                      </g>
+                      <g transform="translate(682,282)">
+                        <rect x="-12" y="-4" width="24" height="8" rx="4" fill="#0b1220" class="blink-y"/>
+                        <circle class="pupils" cx="0" cy="0" r="2.2" fill="#ffffff" opacity="0.9"/>
+                      </g>
+                    </g>
+                    <!-- näsa + mun -->
+                    <path d="M658 290 q4 10 0 18" stroke="#C46C4D" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <path d="M640 318 q20 16 40 0" stroke="#C46C4D" stroke-width="5" stroke-linecap="round" fill="none"/>
+                  </g>
+
+                  <!-- stödjande högerhand (inte vinkande) -->
+                  <g>
+                    <path d="M740,366 C770,362 800,370 808,380 C815,389 808,402 795,405 C770,411 742,404 724,396 Z" fill="url(#shirtBlue)"/>
+                    <circle cx="808" cy="388" r="16" fill="url(#skinB)"/>
+                  </g>
+                </g>
+
+                <!-- små accentprickar -->
+                <circle cx="120" cy="90" r="4" fill="#93C5FD" opacity="0.9"/>
+                <circle cx="860" cy="80" r="4" fill="#A5B4FC" opacity="0.9"/>
+                <circle cx="900" cy="260" r="3" fill="#93C5FD" opacity="0.7"/>
+              </svg>
+
+              <!-- diskreta UI-accents + skuggmatta -->
+              <div class="duo-scenery"></div>
+            </div>
+
+            <!-- hjälptrust text för förtroende -->
+            <p class="text-center text-sm text-gray-600 mt-3">Tryggt möte mellan generationer – på riktigt.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vänster cirkel -->
+      <div class="hidden lg:flex items-center justify-center promo-glass absolute left-0 -translate-x-1/3 top-6 h-48 w-48 rounded-full ring-1 ring-white/30 shadow-2xl animate-[floatY_6s_ease-in-out_infinite] select-none" aria-label="Hösterbjudande – Häckklippning: alla era häckar – fast pris 799 kr">
+        <div class="text-white px-6 text-center leading-snug">
+          <p class="text-[11px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+          <p class="text-lg font-bold">Häckklippning</p>
+          <p class="text-sm opacity-90">Alla era häckar</p>
+          <p class="mt-1 text-base font-semibold">Fast pris 799&nbsp;kr</p>
+        </div>
+      </div>
+
+      <!-- Höger cirkel -->
+      <div class="hidden lg:flex items-center justify-center promo-glass absolute right-0 translate-x-1/3 top-28 h-48 w-48 rounded-full ring-1 ring-white/30 shadow-2xl animate-[floatY_7s_ease-in-out_infinite] select-none" aria-label="Hösterbjudande – Äppelmust: vi mustar alla era äpplen – 799 kr">
+        <div class="text-white px-6 text-center leading-snug">
+          <p class="text-[11px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+          <p class="text-lg font-bold">Äppelmust</p>
+          <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
+          <p class="mt-1 text-base font-semibold">799&nbsp;kr</p>
+        </div>
+      </div>
+
+      <!-- Mobilcirklar -->
+      <div class="lg:hidden container mx-auto px-6 -mt-2 pb-4">
+        <div class="flex items-center justify-center gap-4">
+          <div class="promo-glass h-32 w-32 rounded-full ring-1 ring-white/30 shadow-xl p-4 text-white text-center">
+            <p class="text-[10px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+            <p class="text-base font-bold leading-tight">Häckklippning</p>
+            <p class="text-xs opacity-90">Alla era häckar</p>
+            <p class="mt-1 text-sm font-semibold">Fast pris 799&nbsp;kr</p>
+          </div>
+          <div class="promo-glass h-32 w-32 rounded-full ring-1 ring-white/30 shadow-xl p-4 text-white text-center">
+            <p class="text-[10px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
+            <p class="text-base font-bold leading-tight">Äppelmust</p>
+            <p class="text-xs opacity-90">Vi mustar era äpplen</p>
+            <p class="mt-1 text-sm font-semibold">799&nbsp;kr</p>
           </div>
         </div>
       </div>
