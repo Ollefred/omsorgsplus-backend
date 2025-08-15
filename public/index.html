@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* Karusell-stilar */
+    /* Karusell */
     .carousel { overflow: hidden; position: relative; }
     .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
     .carousel-slide { min-width: 100%; box-sizing: border-box; padding: 1rem; }
@@ -16,19 +16,38 @@
     .carousel-button.prev { left:1rem; }
     .carousel-button.next { right:1rem; }
 
-    /* Glow + float för cirklarna */
-    @keyframes floatY {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-6px); }
-    }
-    .promo-glass {
+    /* Promo-cirklar: glow + float + mörkblå bakgrund */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .promo-glass{
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      background-color: rgba(15, 32, 80, 0.9); /* tydlig mörkblå */
+      background-color: rgba(15,32,80,0.9); /* tydlig mörkblå */
     }
-    .promo-glass p {
-      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+    .promo-glass p{ text-shadow:0 1px 3px rgba(0,0,0,0.85) }
+
+    /* Duo-illustration */
+    @keyframes duoFloat { 0%,100%{ transform: translate(-50%,0) } 50%{ transform: translate(-50%,-6px) } }
+    @keyframes waveHand { 0%,100%{ transform: rotate(0deg) } 50%{ transform: rotate(8deg) } }
+    #duo-illustration {
+      position: absolute;
+      left: 50%;
+      bottom: -28px;           /* hänger ner lite över kanten */
+      transform: translateX(-50%);
+      animation: duoFloat 6s ease-in-out infinite;
+      z-index: 5;              /* under omdömen (som får z-index:10) */
+      pointer-events: none;    /* dekorativ */
+      filter: drop-shadow(0 10px 30px rgba(15,32,80,0.25));
     }
+    #duo-illustration .hand-wave { transform-origin: 260px 120px; animation: waveHand 3.2s ease-in-out infinite; }
+    /* Mindre skärmar: krymp och sänk lite */
+    @media (max-width: 1024px){
+      #duo-illustration { bottom: -18px; width: 440px; }
+    }
+    @media (max-width: 640px){
+      #duo-illustration { display: none; } /* döljs på väldigt små skärmar för renhet */
+    }
+    /* Se till att omdömen ligger över benen */
+    #omdomen-layer { position: relative; z-index: 10; }
   </style>
 </head>
 
@@ -40,7 +59,7 @@
       <nav class="space-x-6">
         <a href="#hero" class="hover:text-gray-300">Startsida</a>
         <a href="staff.html" class="hover:text-gray-300">Vår personal</a>
-        <a href="omdomen.html" class="hover:text-gray-300">Omdömen</a>
+        <a href="omdomen" class="hover:text-gray-300">Omdömen</a>
         <a href="about.html" class="hover:text-indigo-600">Om oss</a>
       </nav>
       <button class="bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700">Logga in</button>
@@ -70,12 +89,12 @@
       </div>
 
       <!-- Höger cirkel -->
-      <div class="hidden lg:flex items-center justify-center promo-glass absolute right-0 translate-x-1/3 top-32 h-48 w-48 rounded-full ring-1 ring-white/30 shadow-2xl animate-[floatY_7s_ease-in-out_infinite] select-none" aria-label="Hösterbjudande – Äppelmust: vi mustar alla era äpplen – Fast pris 799 kr">
+      <div class="hidden lg:flex items-center justify-center promo-glass absolute right-0 translate-x-1/3 top-32 h-48 w-48 rounded-full ring-1 ring-white/30 shadow-2xl animate-[floatY_7s_ease-in-out_infinite] select-none" aria-label="Hösterbjudande – Äppelmust: vi mustar alla era äpplen – 799 kr">
         <div class="text-white px-6 text-center leading-snug">
           <p class="text-[11px] uppercase tracking-widest opacity-80">Hösterbjudande</p>
           <p class="text-lg font-bold">Äppelmust</p>
           <p class="text-sm opacity-90">Vi mustar alla era äpplen</p>
-          <p class="mt-1 text-base font-semibold">Fast pris 799&nbsp;kr</p>
+          <p class="mt-1 text-base font-semibold">799&nbsp;kr</p>
         </div>
       </div>
 
@@ -96,12 +115,76 @@
           </div>
         </div>
       </div>
+
+      <!-- Duo-illustration (SVG) -->
+      <div id="duo-illustration" aria-label="Ung hjälpare från Omsorg Plus bredvid äldre kund – båda glada">
+        <!-- SVG: ren, modern flat-illustration -->
+        <svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <!-- mild bakplatta -->
+          <defs>
+            <linearGradient id="bgfade" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+              <stop offset="100%" stop-color="rgba(255,255,255,0.0)" />
+            </linearGradient>
+          </defs>
+
+          <!-- markskugga -->
+          <ellipse cx="260" cy="280" rx="180" ry="14" fill="rgba(0,0,0,0.10)"/>
+
+          <!-- Äldre herre (vänster) -->
+          <!-- ben -->
+          <rect x="160" y="210" width="18" height="58" rx="9" fill="#2B3348"/>
+          <rect x="185" y="210" width="18" height="58" rx="9" fill="#2B3348"/>
+          <ellipse cx="169" cy="270" rx="18" ry="6" fill="#1B2030"/>
+          <ellipse cx="194" cy="270" rx="18" ry="6" fill="#1B2030"/>
+          <!-- kropp -->
+          <rect x="145" y="135" width="80" height="82" rx="18" fill="#5E6D9B"/>
+          <circle cx="185" cy="124" r="28" fill="#F1DAC5"/>
+          <!-- hår + ögon + leende -->
+          <path d="M160 118c6-16 42-16 50 0v8h-50v-8z" fill="#C4C8D4"/>
+          <circle cx="175" cy="126" r="3" fill="#1F2A44"/>
+          <circle cx="195" cy="126" r="3" fill="#1F2A44"/>
+          <path d="M175 137c6 6 18 6 24 0" stroke="#BF7955" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- käpp -->
+          <rect x="138" y="150" width="6" height="112" rx="3" fill="#8B6A3E" />
+          <circle cx="141" cy="150" r="7" fill="#D9D0C4"/>
+
+          <!-- Ung kille (höger) -->
+          <!-- ben -->
+          <rect x="280" y="210" width="18" height="58" rx="9" fill="#2B3348"/>
+          <rect x="305" y="210" width="18" height="58" rx="9" fill="#2B3348"/>
+          <ellipse cx="289" cy="270" rx="18" ry="6" fill="#1B2030"/>
+          <ellipse cx="314" cy="270" rx="18" ry="6" fill="#1B2030"/>
+          <!-- tröja -->
+          <rect x="260" y="135" width="98" height="82" rx="20" fill="#1F2A44"/>
+          <text x="309" y="180" text-anchor="middle" font-family="Inter,system-ui,-apple-system,Segoe UI,Roboto" font-size="18" fill="#FFFFFF" font-weight="700">Omsorg Plus</text>
+          <!-- huvud -->
+          <circle cx="309" cy="118" r="28" fill="#F5C9A6"/>
+          <path d="M287 110c10-18 44-18 54 0v10h-54v-10z" fill="#2B3348"/>
+          <circle cx="298" cy="120" r="3" fill="#101623"/>
+          <circle cx="320" cy="120" r="3" fill="#101623"/>
+          <path d="M297 130c8 8 20 8 26 0" stroke="#C46C4D" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- höger arm (vinkar) -->
+          <g class="hand-wave">
+            <rect x="350" y="150" width="60" height="16" rx="8" fill="#1F2A44"/>
+            <circle cx="412" cy="158" r="12" fill="#F5C9A6"/>
+          </g>
+          <!-- vänster arm (om axel mot äldre) -->
+          <rect x="238" y="150" width="30" height="16" rx="8" fill="#1F2A44"/>
+          <circle cx="238" cy="158" r="10" fill="#F5C9A6"/>
+
+          <!-- små accenter -->
+          <circle cx="110" cy="70" r="3" fill="#93C5FD" opacity="0.8"/>
+          <circle cx="440" cy="60" r="3" fill="#A5B4FC" opacity="0.8"/>
+          <circle cx="430" cy="200" r="3" fill="#93C5FD" opacity="0.6"/>
+        </svg>
+      </div>
     </section>
 
     <!-- Omdömen -->
-    <section id="omdomen" class="container mx-auto px-6 py-10">
+    <section id="omdomen" class="container mx-auto px-6 py-10" id="omdomen-layer">
       <h2 class="text-2xl font-semibold mb-8 text-center">Vad våra kunder säger</h2>
-      <div class="carousel relative">
+      <div class="carousel relative z-10"> <!-- z-10 gör att korten täcker benen -->
         <button class="carousel-button prev">❮</button>
         <div class="carousel-track">
           <div class="carousel-slide">
@@ -147,6 +230,7 @@
       </form>
     </section>
 
+    <!-- Gömda fält (om backend kräver) -->
     <form id="contactForm" class="hidden">
       <input name="name" required />
       <input name="email" type="email" required />
@@ -174,22 +258,20 @@
 
   <!-- Scripts -->
   <script>
+    // Karusell
     (function () {
       const track = document.querySelector(".carousel-track");
       const slides = Array.from(document.querySelectorAll(".carousel-slide"));
       const prevBtn = document.querySelector(".carousel-button.prev");
       const nextBtn = document.querySelector(".carousel-button.next");
       if (!track || slides.length === 0) return;
-
       let index = 0;
-      function go(i) {
-        index = (i + slides.length) % slides.length;
-        track.style.transform = "translateX(" + (-index * 100) + "%)";
-      }
-      prevBtn && prevBtn.addEventListener("click", () => go(index - 1));
-      nextBtn && nextBtn.addEventListener("click", () => go(index + 1));
+      function go(i){ index=(i+slides.length)%slides.length; track.style.transform="translateX("+(-index*100)+"%)"; }
+      prevBtn && prevBtn.addEventListener("click", ()=>go(index-1));
+      nextBtn && nextBtn.addEventListener("click", ()=>go(index+1));
     })();
 
+    // Frågeformulär
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("inquiry-form");
       if (!form) return;
@@ -199,10 +281,7 @@
         const data = new FormData(form);
         const payload = { name: data.get("name"), email: data.get("email"), question: data.get("question") };
         try {
-          const res = await fetch(API_CONTACT, {
-            method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
+          const res = await fetch(API_CONTACT, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) });
           if (!res.ok) throw new Error(res.statusText);
           form.innerHTML = `<div class="text-center py-8"><h4 class="text-2xl font-bold mb-4">Tack för din fråga!</h4><p>Vi återkommer så snart vi kan.</p></div>`;
         } catch (err) {
