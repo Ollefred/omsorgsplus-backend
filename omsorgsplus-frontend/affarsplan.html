@@ -1,69 +1,510 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Affärsplan – Omsorg Plus</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Affärsplan – Omsorg Plus (Ljus)</title>
+  <meta name="description" content="Affärsplan och bilagor för Omsorg Plus – en trygg plattform som kopplar samman äldre med utbildade unga hjälpare för sociala och vardagsnära insatser."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    :root{
+      --bg:#f7fafc;              /* ljus bakgrund */
+      --surface:#ffffff;          /* kortbakgrund */
+      --ink:#0f172a;              /* nästan svart text */
+      --muted:#475569;            /* slate-600 */
+      --line:#e2e8f0;             /* kantlinjer */
+      --brand:#0ea5a3;            /* teal-500 */
+      --brand-2:#2dd4bf;          /* teal-300 */
+      --accent:#14532d;           /* djupgrön accent för små detaljer */
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --radius-2xl: 24px;
+      --radius-xl: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:
+      radial-gradient(1000px 600px at 85% -5%, rgba(45,212,191,.25), transparent 60%),
+      radial-gradient(800px 500px at -10% 30%, rgba(14,165,163,.18), transparent 60%),
+      var(--bg);
+      color:var(--ink); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; line-height:1.6}
+
+    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.85); backdrop-filter:saturate(160%) blur(8px); border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:14px 22px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg, var(--brand), var(--brand-2));display:grid;place-items:center;box-shadow:var(--shadow)}
+    .logo svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
+    .brand h1{margin:0;font:700 20px/1 Playfair Display, Georgia, serif; letter-spacing:.3px; color:#0b1226}
+    .nav a.cta{padding:10px 14px;border-radius:999px;background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#052726; font-weight:700; text-decoration:none; box-shadow: var(--shadow)}
+
+    .hero{max-width:1200px;margin:30px auto 0; padding:30px 22px 8px; display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center}
+    .hero-card{background:var(--surface); border:1px solid var(--line); border-radius: var(--radius-2xl); padding:34px; box-shadow:var(--shadow)}
+    .eyebrow{display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border:1px solid rgba(14,165,163,.35); border-radius:999px; color:#065f5b; font-size:12px; letter-spacing:.3px; text-transform:uppercase; margin-bottom:14px; background:rgba(45,212,191,.12)}
+    h2.title{margin:0 0 10px; font:700 42px/1.15 Playfair Display, Georgia, serif; color:#0b1226}
+    .subtitle{font-size:18px;color:var(--muted)}
+    .hero-metrics{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:22px}
+    .metric{background:linear-gradient(180deg, rgba(14,165,163,.10), rgba(14,165,163,.03)); border:1px solid rgba(2,6,23,.06); border-radius:16px; padding:14px 16px}
+    .metric b{display:block; font-size:20px; color:#065f5b}
+    .metric span{font-size:12px; color:var(--muted)}
+    .illus{border-radius: var(--radius-2xl); background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.7)); border:1px solid var(--line); padding:26px; box-shadow:var(--shadow)}
+
+    .container{max-width:1200px;margin:0 auto;padding:8px 22px 80px}
+
+    .toc{display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 28px}
+    .toc a{color:#065f5b;text-decoration:none;border:1px solid rgba(14,165,163,.35); padding:8px 12px; border-radius:999px; font-size:13px; background:rgba(45,212,191,.08)}
+
+    section{margin:32px 0}
+    h3{font:700 22px/1.25 Inter, system-ui; letter-spacing:.2px; color:#0b1226; margin:0 0 10px}
+    p{margin:0 0 10px}
+
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:18px}
+    .card{grid-column: span 12; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-xl); padding:22px; box-shadow: var(--shadow)}
+    .card--half{grid-column: span 6}
+    .card--third{grid-column: span 4}
+    .card--two{grid-column: span 8}
+
+    .list{display:grid; gap:8px; margin:10px 0}
+    .list li{background:#f8fafc; border:1px solid var(--line); padding:10px 12px; border-radius:12px}
+
+    .badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#f1f5f9; color:#0f172a}
+    .kpi{display:flex; gap:16px; align-items:center}
+    .kpi b{font-size:28px; color:#065f5b}
+
+    .timeline{position:relative; padding-left:14px}
+    .timeline::before{content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background:linear-gradient(var(--brand), transparent)}
+    .tl-item{position:relative; padding-left:20px; margin:12px 0}
+    .tl-item::before{content:""; position:absolute; left:-1px; top:6px; width:14px; height:14px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 0 4px rgba(45,212,191,.18)}
+
+    .quote{font-style:italic; color:#0b1226; border-left:3px solid rgba(14,165,163,.4); padding-left:12px}
+
+    .table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; border:1px solid var(--line)}
+    .table th,.table td{padding:12px 14px; text-align:left}
+    .table thead th{background:#f1f5f9; color:#0b1226}
+    .table tbody tr:nth-child(odd){background:#fbfbfd}
+    .table tfoot td{border-top:1px dashed var(--line); color:#065f5b}
+
+    footer{margin-top:34px; padding:22px; text-align:center; color:var(--muted)}
+
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; text-decoration:none; color:#052726; background:linear-gradient(135deg, var(--brand), var(--brand-2)); font-weight:700; box-shadow:var(--shadow)}
+    .btn.secondary{background:white; border:1px solid rgba(14,165,163,.4); color:#065f5b}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .card--half, .card--third, .card--two{grid-column: span 12}
+    }
+
+    @media print{
+      body{background:white; color:#111827}
+      header, .nav a.cta{display:none}
+      .hero, .container{max-width:100%; padding:0}
+      .card, .illus{box-shadow:none; border-color:#e5e7eb}
+      a:link, a:visited{color:#111827}
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-  <div class="max-w-5xl mx-auto p-6 md:p-12">
-    <header class="text-center mb-10">
-      <h1 class="text-4xl font-extrabold text-indigo-700">Affärsplan – Omsorg Plus</h1>
-      <p class="mt-3 text-lg text-slate-600">En socialt hållbar plattform som förenar unga frilansande hemtjänstarbetare med äldre som behöver hjälp.</p>
-    </header>
+<body>
+  <header>
+    <nav class="nav" aria-label="Primär">
+      <a class="brand" href="#top" aria-label="Omsorg Plus">
+        <span class="logo" aria-hidden="true">
+          <!-- heart-hands icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 21s-6-4.35-9-7.35C1.02 12.67 1 10 3.5 8.5S8 9 8 9s.5-2 3-2 3 2 3 2 2.5-2.5 4.5-1.5 2.48 4.17 0 5.65C18 16.65 12 21 12 21Z" fill="#052726"/>
+          </svg>
+        </span>
+        <h1>Omsorg Plus</h1>
+      </a>
+      <a class="cta" href="mailto:info@omsorgplus.se">Kontakta oss</a>
+    </nav>
+  </header>
 
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-slate-700 mb-4">Affärsidé</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Omsorg Plus är en digital plattform som matchar unga frilansande “hemtjänstarbetare” med äldre personer i behov av hjälp i vardagen. Precis som Uber inte är en taxitjänst utan en plattform för att koppla samman förare med kunder, är vår produkt själva plattformen – inte de individuella tjänsterna. 
-      </p>
-      <p class="mt-3 text-slate-700 leading-relaxed">
-        Vår vision är att skapa ett tryggt, enkelt och socialt hållbart ekosystem där generationer möts. Vi ger unga möjlighet att arbeta flexibelt och lokalt, samtidigt som vi erbjuder äldre en pålitlig, prisvärd och personlig hjälp. Plattformen säkerställer trygghet genom bakgrundskontroller och bedömningssystem.
-      </p>
+  <main id="top">
+    <section class="hero" aria-label="Hero">
+      <div class="hero-card">
+        <span class="eyebrow">Affärsplan · 2025</span>
+        <h2 class="title">Vardagsnära omsorg som bygger broar mellan generationer</h2>
+        <p class="subtitle">Omsorg Plus matchar äldre och anhöriga med trygga, utbildade unga hjälpare för sällskap, promenader, lättare sysslor och teknikhjälp. Alltid samma hjälpare – varje vecka.</p>
+        <div class="hero-metrics" role="group" aria-label="Nyckeltal">
+          <div class="metric"><b>500 kr</b><span>exempelpris per besök (60–90 min)</span></div>
+          <div class="metric"><b>26&nbsp;000 kr</b><span>årligt värde per kund vid 1 besök/vecka</span></div>
+          <div class="metric"><b>15–20&nbsp;%</b><span>plattformens provision</span></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn" href="#sammanfattning">Läs sammanfattning</a>
+          <a class="btn secondary" href="#bilagor">Gå till bilagor</a>
+        </div>
+      </div>
+      <div class="illus" aria-hidden="true">
+        <svg viewBox="0 0 600 420" width="100%" height="100%">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#0ea5a3"/>
+              <stop offset="100%" stop-color="#2dd4bf"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="600" height="420" rx="24" fill="#ffffff" stroke="#e2e8f0"/>
+          <g>
+            <circle cx="90" cy="90" r="42" fill="url(#g1)" opacity=".9"/>
+            <rect x="150" y="60" width="360" height="20" rx="6" fill="rgba(2,6,23,.65)"/>
+            <rect x="150" y="90" width="260" height="14" rx="6" fill="rgba(2,6,23,.35)"/>
+          </g>
+          <g transform="translate(0,150)">
+            <circle cx="90" cy="90" r="42" fill="url(#g1)" opacity=".6"/>
+            <rect x="150" y="60" width="320" height="20" rx="6" fill="rgba(2,6,23,.65)"/>
+            <rect x="150" y="90" width="260" height="14" rx="6" fill="rgba(2,6,23,.35)"/>
+          </g>
+          <g transform="translate(0,300)">
+            <circle cx="90" cy="90" r="42" fill="url(#g1)" opacity=".4"/>
+            <rect x="150" y="60" width="280" height="20" rx="6" fill="rgba(2,6,23,.65)"/>
+            <rect x="150" y="90" width="220" height="14" rx="6" fill="rgba(2,6,23,.35)"/>
+          </g>
+        </svg>
+      </div>
     </section>
 
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-slate-700 mb-4">Strategi fram till årsskiftet</h2>
-      <ol class="list-decimal list-inside space-y-2 text-slate-700">
-        <li><strong>Skapa och lansera plattformen</strong> (Olle)</li>
-        <li><strong>Skapa flyers</strong> (Olle) med hösterbjudanden såsom häckklippning för 699 kr, mustning av äpplen för 499 kr.</li>
-        <li><strong>Beställa och distribuera flyers</strong> (Fredrik) i brevlådor, på elskåp och anslagstavlor.</li>
-        <li><strong>Få in Historiegruppen</strong> till halva priset (Olle).</li>
-        <li><strong>Utföra jobb i världsklass</strong> (Fredrik) för att bygga ett starkt rykte.</li>
-        <li><strong>Återinvestera intäkter</strong> (Olle & Fredrik) i ny marknadsföring för att kontinuerligt få in nya kunder.</li>
-        <li><strong>Anställa vår första medarbetare</strong>.</li>
-      </ol>
-    </section>
+    <div class="container">
+      <div class="toc" aria-label="Innehåll">
+        <a href="#sammanfattning">Sammanfattning</a>
+        <a href="#problem">Problembild</a>
+        <a href="#losning">Lösning & värde</a>
+        <a href="#marknad">Marknad & målgrupp</a>
+        <a href="#erbjudande">Tjänst & plattform</a>
+        <a href="#intakter">Affärsmodell & prissättning</a>
+        <a href="#go-to-market">Marknadsföring</a>
+        <a href="#drift">Drift & kvalitet</a>
+        <a href="#roadmap">Plan & milstolpar</a>
+        <a href="#finans">Ekonomi & KPI:er</a>
+        <a href="#risk">Risker & mitigering</a>
+        <a href="#bilagor">Bilagor</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
 
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-slate-700 mb-4">Ekonomiskt mål</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Vårt initiala finansiella mål är att tjäna <strong>10 000 kr</strong> via Swish. När vi nått den summan öppnar vi ett aktiebolag (AB) för att kunna skala upp verksamheten, bygga varumärket och attrahera fler kunder och samarbetspartners.
-      </p>
-    </section>
+      <section id="sammanfattning">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Sammanfattning (Executive Summary)</h3>
+            <p>Omsorg Plus är en plattform som matchar äldre och anhöriga med pålitliga unga hjälpare för socialt sällskap och vardagsnära stöttning. Kärnan är kontinuitet, bemötande och flexibilitet – samma hjälpare, regelbundet, på tider som passar. Start i Uppsala och skalning regionalt.</p>
+            <ul class="list">
+              <li><strong>Behovet:</strong> Social tid, kontinuitet och avlastning för anhöriga.</li>
+              <li><strong>Lösningen:</strong> Säker marknadsplats med bakgrundskontroller, utbildning, betyg och fasta paketpriser.</li>
+              <li><strong>Affärsmodell:</strong> Provision per bokning och abonnemang för återkommande besök.</li>
+              <li><strong>Differentiering:</strong> Personlig matchning och relationsbyggande mellan generationer.</li>
+            </ul>
+          </article>
+          <aside class="card card--third">
+            <h3>Positionering</h3>
+            <p class="quote">“Samma ansikte. Samma tid. Samma trygghet.”</p>
+            <p>Premiumkänsla, men tillgängligt. Fasta priser och tydlig leverans skapar förtroende från första besöket.</p>
+          </aside>
+        </div>
+      </section>
 
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-slate-700 mb-4">Socialt hållbar profil</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Omsorg Plus bygger på idén om att affärer kan drivas med hjärtat. Genom att ge unga lokala arbetstillfällen och äldre trygg och personlig hjälp skapar vi sociala värden utöver de ekonomiska. Vi minskar ensamhet, stärker lokalsamhället och inspirerar till fler mellanmänskliga möten.
-      </p>
-    </section>
+      <section id="problem">
+        <div class="grid">
+          <article class="card card--half">
+            <h3>Problembild</h3>
+            <ul class="list">
+              <li>Bristande kontinuitet – olika personer skapar otrygghet.</li>
+              <li>Social samvaro prioriteras ofta bort i befintliga insatser.</li>
+              <li>Anhöriga behöver avlastning och förutsägbarhet.</li>
+              <li>Digital klyfta – bank‑ID, appar och videosamtal kan bli hinder.</li>
+            </ul>
+          </article>
+          <article class="card card--half">
+            <h3>Varför nu?</h3>
+            <ul class="list">
+              <li>Åldrande befolkning & efterfrågan på individnära tjänster.</li>
+              <li>Unga söker meningsfullt extrajobb som går att kombinera med studier.</li>
+              <li>Anhöriga har digital vana som gör bokning och betalning smidig.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
 
-    <section>
-      <h2 class="text-2xl font-bold text-slate-700 mb-4">Framgångsfaktorer</h2>
-      <ul class="list-disc list-inside space-y-1 text-slate-700">
-        <li>Enkel och användarvänlig digital plattform.</li>
-        <li>Stark lokal förankring och förtroende i Uppsala med omnejd.</li>
-        <li>Socialt hållbar affärsmodell som gynnar både unga och äldre.</li>
-        <li>Flexibla tjänster som anpassas efter kundens behov.</li>
-        <li>Kontinuerlig marknadsföring och återinvestering av intäkter.</li>
-      </ul>
-    </section>
-  </div>
+      <section id="losning">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Lösning & värdeerbjudande</h3>
+            <p>Återkommande, fasta besök med samma hjälpare. Paket som inkluderar tid för promenad, fika, högläsning, lätt träning och digital hjälp – utan minutjakt.</p>
+            <div class="grid" style="margin-top:10px">
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Trygg matchning</h4>
+                <ul class="list">
+                  <li>ID‑verifiering, utdrag ur belastningsregistret och referenser.</li>
+                  <li>Introduktionsutbildning i bemötande, HLR och sekretess.</li>
+                  <li>Betyg och omdömen efter varje besök; nöjd‑kund‑garanti.</li>
+                </ul>
+              </div>
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Kontinuitet & relation</h4>
+                <ul class="list">
+                  <li>Återkommande tider och samma hjälpare varje vecka.</li>
+                  <li>Fasta priser och tydliga paket för minskad osäkerhet.</li>
+                  <li>Anhörigportal med schema, anteckningar och kvitton.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="marknad">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Marknad & målgrupp</h3>
+            <p><strong>Startregion:</strong> Uppsala (Sunnersta först). Primära köpare: anhöriga (40–65 år) och äldre som vill ha hjälp på egna villkor.</p>
+            <div class="grid" style="margin-top:10px">
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Kundsegment</h4>
+                <ul class="list">
+                  <li>Äldre som bor hemma och vill ha regelbundna besök.</li>
+                  <li>Anhöriga som koordinerar stöd på distans (andra städer/länder).</li>
+                  <li>Seniorboenden/BRF för gruppaktiviteter.</li>
+                </ul>
+              </div>
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Köptriggers</h4>
+                <ul class="list">
+                  <li>Oro för ensamhet och bristande kontinuitet.</li>
+                  <li>Behov av teknikhjälp eller promenader/träning.</li>
+                  <li>Önskemål om avlastning för anhöriga.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="erbjudande">
+        <div class="grid">
+          <article class="card card--half">
+            <h3>Tjänst & plattform</h3>
+            <ul class="list">
+              <li>Webb/mobil: välj hjälpare, bokning, betalning och kvitton.</li>
+              <li>Profiler med utbildning, språk, intressen och omdömen.</li>
+              <li>Automatisk betalning (kort/Swish), tydlig avbokning.</li>
+              <li>Fasta paket: 60, 90 och 120 minuter inkl. social tid.</li>
+            </ul>
+          </article>
+          <article class="card card--half">
+            <h3>Kvalitet & trygghet</h3>
+            <ul class="list">
+              <li>Försäkring, tystnadsplikt, GDPR‑rutiner och incidenthantering.</li>
+              <li>Matchning utifrån intressen (t.ex. trädgård, musik, IT).</li>
+              <li>Kontinuerlig feedback mellan kund, hjälpare och Omsorg Plus.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="intakter">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Affärsmodell & prissättning</h3>
+            <p>Provision per uppdrag och abonnemang för återkommande besök. Fasta priser säkerställer närvaro och socialt fokus.</p>
+            <table class="table" role="table" aria-label="Prisexempel">
+              <thead>
+                <tr><th>Paket</th><th>Exempelpris</th><th>Frekvens</th><th>Årsvärde (LTV‑exempel)</th><th>Intäkt vid 15% prov.</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>60–90 min</td><td>500 kr</td><td>1 ×/vecka</td><td>26&nbsp;000 kr</td><td>3&nbsp;900 kr</td></tr>
+                <tr><td>90–120 min</td><td>700 kr</td><td>1 ×/vecka</td><td>36&nbsp;400 kr</td><td>5&nbsp;460 kr</td></tr>
+                <tr><td>60 min</td><td>500 kr</td><td>2 ×/månad</td><td>12&nbsp;000 kr</td><td>1&nbsp;800 kr</td></tr>
+              </tbody>
+              <tfoot><tr><td colspan="5">* Priserna är exempel och kan justeras per region och innehåll.</td></tr></tfoot>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section id="go-to-market">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Go‑to‑Market & marknadsföring</h3>
+            <ul class="list">
+              <li><strong>Lansering Sunnersta (Uppsala):</strong> flygblad/posters i brevlådor och anslagstavlor; lokalpress.</li>
+              <li><strong>Säsongskampanjer:</strong> häckklippning, äppelmustning och höstpromenader som inkörsport till sociala besök.</li>
+              <li><strong>Partnerskap:</strong> Coop Sunnersta, Drömtallrik, Sunnerstaköket m.fl. – “50% på första besöket”‑erbjudanden.</li>
+              <li><strong>Referral:</strong> anhörigprogram – ge bort första fikan.</li>
+              <li><strong>Digitalt:</strong> omsorgplus.se, Google Business, Facebook/Instagram.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="drift">
+        <div class="grid">
+          <article class="card card--half">
+            <h3>Drift & operativ modell</h3>
+            <ul class="list">
+              <li>Rekrytering via skolor/universitet; värderingsstyrd urval.</li>
+              <li>Onboarding med utbildning, handledning och provperiod.</li>
+              <li>Planering i plattformen – matchning, schema, betalning.</li>
+              <li>Kundsupport vardagar; jour vid behov.</li>
+            </ul>
+          </article>
+          <article class="card card--half">
+            <h3>Kvalitetssäkring</h3>
+            <ul class="list">
+              <li>Bakgrundskontroller, ID‑verifiering och referenser.</li>
+              <li>Besöksrapporter (kort anteckning till anhöriga).</li>
+              <li>Trygghetsförsäkring, arbetsmiljö och avvikelsehantering.</li>
+              <li>Månatliga kvalitetsmöten med hjälpare och kundansvarig.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Plan & milstolpar</h3>
+            <div class="timeline">
+              <div class="tl-item"><strong>Augusti:</strong> Lansering & första tre kunder; kampanj i Sunnersta.</div>
+              <div class="tl-item"><strong>September:</strong> Omsättning 10&nbsp;000 kr (Swish/kort), etablera partnerskap lokalt.</div>
+              <div class="tl-item"><strong>Oktober:</strong> Starta aktiebolag (AB), omsättning 25&nbsp;000 kr.</div>
+              <div class="tl-item"><strong>November:</strong> 40&nbsp;000 kr i omsättning och första anställda koordinatorn.</div>
+              <div class="tl-item"><strong>December:</strong> 50&nbsp;000 kr i omsättning, två anställda; plan för expansion Q1.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="finans">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Ekonomi & KPI:er</h3>
+            <div class="grid" style="margin-top:10px">
+              <div class="card card--third">
+                <h4 style="margin:0 0 6px">Nyckeltal</h4>
+                <ul class="list">
+                  <li>Antal aktiva kunder och hjälpare</li>
+                  <li>Återköpsfrekvens och retention (M1, M3, M6)</li>
+                  <li>Genomsnittligt besöksvärde och LTV</li>
+                  <li>CAC och payback‑tid</li>
+                  <li>NKI/NPS</li>
+                </ul>
+              </div>
+              <div class="card card--third">
+                <h4 style="margin:0 0 6px">Kostnadsstruktur</h4>
+                <ul class="list">
+                  <li>Rekrytering, utbildning och försäkring</li>
+                  <li>Teknik (plattform, betalning, drift)</li>
+                  <li>Marknadsföring lokalt och digitalt</li>
+                  <li>Kundsupport och kvalitetssäkring</li>
+                </ul>
+              </div>
+              <div class="card card--third">
+                <h4 style="margin:0 0 6px">Mål</h4>
+                <ul class="list">
+                  <li>Bruttomarginal via provision 15–20%</li>
+                  <li>Positiv enhets‑ekonomi från kund #1</li>
+                  <li>Abonnemang ≥ 60% av intäkter inom 12 månader</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="risk">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Risker & mitigering</h3>
+            <div class="grid" style="margin-top:10px">
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Rekrytering & kvalitet</h4>
+                <ul class="list">
+                  <li><strong>Risk:</strong> Få hjälpare i startskedet. <br><strong>Mitigering:</strong> samarbete med skolor, attraktiva timmar, värderingsstyrd rekrytering.</li>
+                  <li><strong>Risk:</strong> Ojämn kundupplevelse. <br><strong>Mitigering:</strong> utbildning, checklistor, mentorskap och tät feedback.</li>
+                </ul>
+              </div>
+              <div class="card card--half">
+                <h4 style="margin:0 0 6px">Efterfrågan & varumärke</h4>
+                <ul class="list">
+                  <li><strong>Risk:</strong> Låg kännedom lokalt. <br><strong>Mitigering:</strong> hyperlokal marknadsföring, partnerskap och “första‑fika‑gratis”.</li>
+                  <li><strong>Risk:</strong> Priskänslighet. <br><strong>Mitigering:</strong> tydliga paket, abonnemangs‑rabatt, prova‑på‑besök.</li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top:8px">Juridik/etik: privat social samvaro och vardagshjälp – inte medicinska insatser. Klara villkor, sekretess och försäkring är centralt.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Bilagor -->
+      <section id="bilagor">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Bilaga A – Prisexempel & paket</h3>
+            <table class="table" role="table" aria-label="Prisexempel och paket">
+              <thead>
+                <tr><th>Paket</th><th>Innehåll</th><th>Exempelpris</th><th>Kommentar</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Socialt besök 60–90 min</td><td>Fika, promenad, högläsning, digital hjälp</td><td>500 kr</td><td>Bas för återkommande 1×/vecka</td></tr>
+                <tr><td>Socialt besök 90–120 min</td><td>Som ovan + extra aktivitet (ärende, lätt träning)</td><td>700 kr</td><td>Passar par/kompisar</td></tr>
+                <tr><td>Teknikhjälp 60 min</td><td>Bank‑ID, appar, videosamtal, smart TV</td><td>500 kr</td><td>2×/månad ger 12 000 kr/år</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card card--two">
+            <h3>Bilaga B – Marknadsplan Sunnersta</h3>
+            <ul class="list">
+              <li>Flygblad/posters i södra Uppsala (Sunnersta) – gångstråk, BRF, anslagstavlor.</li>
+              <li>Höst‑erbjudanden: häckklippning, äppelmustning, höstpromenad.</li>
+              <li>Lokalpress och Facebook‑grupper i området.</li>
+              <li>Partnerskap med Coop Sunnersta, Drömtallrik, Sunnerstaköket m.fl.</li>
+              <li>Budskap: “Samma ansikte. Samma tid. Samma trygghet.”</li>
+            </ul>
+          </article>
+
+          <article class="card card--two">
+            <h3>Bilaga C – Tidslinje för bolagsstart</h3>
+            <div class="timeline">
+              <div class="tl-item"><strong>Augusti:</strong> Lansering & 3 första kunder.</div>
+              <div class="tl-item"><strong>September:</strong> Jobb för 10&nbsp;000 kr, Swish/kort.</div>
+              <div class="tl-item"><strong>Oktober:</strong> Öppna AB, 25&nbsp;000 kr.</div>
+              <div class="tl-item"><strong>November:</strong> 40&nbsp;000 kr, första anställda koordinatorn.</div>
+              <div class="tl-item"><strong>December:</strong> 50&nbsp;000 kr och två anställda.</div>
+            </div>
+          </article>
+
+          <article class="card card--two">
+            <h3>Bilaga D – Partnerskap & erbjudanden</h3>
+            <ul class="list">
+              <li>“Du som handlar på Coop får 50% på din första hjälpare” – exponering vid entré.</li>
+              <li>Gemensam kampanj med lokala caféer (första fikan ingår).</li>
+              <li>Referral‑program för anhöriga: ge bort ett prova‑på‑besök.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="kontakt">
+        <div class="grid">
+          <article class="card card--two">
+            <h3>Kontakt & nästa steg</h3>
+            <p>Vill du se en demo, starta i ditt område eller diskutera partnerskap?</p>
+            <div class="cta-row">
+              <a class="btn" href="mailto:info@omsorgplus.se">info@omsorgplus.se</a>
+              <a class="btn secondary" href="#top" onclick="window.print(); return false;">Skriv ut som PDF</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Omsorg Plus · omsorgplus.se · Uppsala
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
