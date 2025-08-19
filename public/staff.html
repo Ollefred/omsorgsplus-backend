@@ -7,8 +7,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Flatpickr CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
-  <style>
+<style>
     body { font-family: 'Inter', sans-serif; }
     .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
     .card-hover:hover { transform: translateY(-6px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
@@ -57,7 +56,7 @@
         </div>
         <div>
           <label class="block font-medium text-gray-700 mb-1">Välj datum & tid</label>
-          <input type="text" id="datetime" name="datetime" readonly class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" placeholder="Klicka för att välja" />
+          <input type="datetime-local" id="datetime" name="datetime" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-200" required />
         </div>
         <div>
           <label class="block font-medium text-gray-700 mb-1">Din adress</label>
@@ -97,8 +96,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script>
+<script>
     document.addEventListener("DOMContentLoaded", () => {
 const API_STAFF = "/api/staff";
 const API_BOOK  = "/api/bookings";
@@ -118,8 +116,7 @@ const API_BOOK  = "/api/bookings";
       const infoModalRating= document.getElementById("info-modal-rating");
       const infoModalPhone = document.getElementById("info-modal-phone");
       const infoModalDesc  = document.getElementById("info-modal-desc");
-      let picker;
-      let allStaff = [];
+let allStaff = [];
 
       // Close modals
       bookingClose.addEventListener("click", () => bookingModal.classList.add("hidden"));
@@ -201,8 +198,16 @@ const API_BOOK  = "/api/bookings";
       function openBookingModal(staffId) {
         bookingModal.classList.remove("hidden");
         staffSelect.value = staffId;
-        if (picker) picker.destroy();
-        picker = flatpickr(datetimeInput, { enableTime: true, dateFormat: "Y-m-d H:i", minDate: "today", minTime: "07:00", maxTime: "18:00" });
+        // use native datetime-local with min now and 5min steps
+        const now = new Date();
+        now.setSeconds(0,0);
+        const stepMin = 5;
+        const rounded = new Date(Math.ceil(now.getTime()/(stepMin*60000))*(stepMin*60000));
+        const pad = (n)=>String(n).padStart(2,'0');
+        const val = `${rounded.getFullYear()}-${pad(rounded.getMonth()+1)}-${pad(rounded.getDate())}T${pad(rounded.getHours())}:${pad(rounded.getMinutes())}`;
+        datetimeInput.min = val;
+        datetimeInput.step = 300;
+        if(!datetimeInput.value) datetimeInput.value = val;
       }
 
       form.addEventListener("submit", async e => {

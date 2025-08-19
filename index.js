@@ -1,4 +1,4 @@
-// index.js – stabil, med CSP för Tailwind + Maps och HTTPS-redirect
+// index.js – stabil, med CSP, HTTPS-redirect och statiska filer
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -9,6 +9,9 @@ import morgan from 'morgan';
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -32,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// === 3) Helmet med CSP som tillåter Tailwind-CDN, inline script och Google Maps ===
+// === 3) Helmet med CSP som tillåter Tailwind-CDN, jsDelivr (Flatpickr), Google Maps och inline ===
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -41,28 +44,31 @@ app.use(
         // allt annat utgår från self
         "default-src": ["'self'"],
 
-        // JS – tillåt Tailwind-CDN + ev. Maps + inline (du har inline-script)
+        // JS – tillåt Tailwind-CDN + Maps + inline + jsDelivr (Flatpickr)
         "script-src": [
           "'self'",
           "'unsafe-inline'",
           "https://cdn.tailwindcss.com",
           "https://maps.googleapis.com",
-          "https://maps.gstatic.com"
+          "https://maps.gstatic.com",
+          "https://cdn.jsdelivr.net"
         ],
         "script-src-elem": [
           "'self'",
           "'unsafe-inline'",
           "https://cdn.tailwindcss.com",
           "https://maps.googleapis.com",
-          "https://maps.gstatic.com"
+          "https://maps.gstatic.com",
+          "https://cdn.jsdelivr.net"
         ],
 
-        // CSS & typsnitt (Google Fonts om du använder det)
-        "style-src": ["'self'", "'unsafe-inline'", "https:", "https://fonts.googleapis.com"],
+        // CSS & typsnitt (Google Fonts och jsDelivr CSS om du använder det)
+        "style-src": ["'self'", "'unsafe-inline'", "https:", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
         "font-src": ["'self'", "https://fonts.gstatic.com", "data:"],
 
-        // Bilder + fetch/ajaxi
+        // Bilder + fetch/AJAX
         "img-src": ["'self'", "https:", "data:"],
+        // Tillåt API-anrop över https + egen origin
         "connect-src": ["'self'", "https:"],
 
         // Iframes (Google Maps embed)
@@ -87,17 +93,12 @@ app.use(
   })
 );
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || '*',
-    credentials: true
-  })
-);
 
-// === 5) Statiska filer från /public + SPA-fallback ===
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// CORS – gör enkelt först (lås med origin i prod om du vill)
+const corsOrigin = process.env.CORS_ORIGIN || true; // true = tillåt alla (dev)
+app.use(cors({ origin: corsOrigin, credentials: true }));
 
+// === 5) Statiska filer (Vite buildade filer eller ren HTML) ===
 const publicDir = path.join(__dirname, 'public');
 const indexHtml = path.join(publicDir, 'index.html');
 
@@ -131,12 +132,15 @@ const loadRoutes = async () => {
     console.error('Kunde inte ladda /api/contact:', e);
   }
 };
-loadRoutes();
+await loadRoutes();
 
-// === 7) Global error handler ===
+// 404 för okända API-vägar
+app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
+
+// === 7) Felhanterare ===
 app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal Server Error' });
+  console.error(err);
+  res.status(500).json({ error: 'Server error' });
 });
 
 // === 8) Starta servern (före DB-koppling) ===
